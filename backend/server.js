@@ -16,8 +16,14 @@ const authRoutes = require('./routes/auth');
 const app = express();
 
 // db
-mongoose.connect(process.env.DATABASE_LOCAL, {useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
-.then(() => console.log('DB connected'));
+mongoose
+    .connect(process.env.DATABASE_LOCAL, {
+        useNewUrlParser: true,  
+        useUnifiedTopology: true, 
+        useCreateIndex: true, 
+        useFindAndModify: false 
+    })
+    .then(() => console.log('DB connected'));
 
 // middlewares
 app.use(morgan('dev'));

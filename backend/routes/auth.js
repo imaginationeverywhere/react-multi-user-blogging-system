@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+
+// auth controllers
 const {
   signup,
   signin,
@@ -9,6 +11,8 @@ const {
 
 // validators
 const { runValidation } = require("../validators");
+
+// auth validators
 const {
   userSiignupValidator,
   userSiigninValidator

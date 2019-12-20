@@ -24,7 +24,7 @@ exports.signup = (req, res) => {
       }
       // res.json({
       //     user: success
-      // })
+      // });
       res.json({
         message: "Signup success! Please signin."
       });
@@ -56,6 +56,7 @@ exports.signin = (req, res) => {
     const { _id, username, name, email, role } = user;
     return res.json({
       token,
+      // don't send the entire user only send _id, username, name, email, role
       user: { _id, username, name, email, role }
     });
   });
