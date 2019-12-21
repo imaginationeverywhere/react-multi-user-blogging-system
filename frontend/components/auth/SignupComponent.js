@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { signup } from '../../actions/auth';
+import { useState, useEffect } from 'react';
+import Router from "next/router";
+import { signup, isAuth } from '../../actions/auth';
 
 const SignupComponent = () => {
     const [values, setValues] = useState({
-        name: 'Ryan',
-        email: 'ryan@gmail.com',
-        password: 'rrrrrr',
+        name: 'Amen Ra',
+        email: 'mojaray2k@gmail.com',
+        password: 'password',
         error: '',
         loading: false,
         message: '',
@@ -13,6 +14,11 @@ const SignupComponent = () => {
     });
 
     const { name, email, password, error, loading, message, showForm } = values;
+
+    // redirect user to home page is they try to go to the "/signup" route and they are already signed in
+    useEffect(() => {
+        isAuth() && Router.push('/');
+    }, [])
 
     const handleSubmit = e => {
         e.preventDefault();
