@@ -21,10 +21,10 @@ const {
 router.post("/signup", userSiignupValidator, runValidation, signup);
 router.post("/signin", userSiigninValidator, runValidation, signin);
 router.get("/signout", singout);
-router.get("/secret", requireSignin, (req, res) => {
-  res.json({
-    message: "you have access to a secret page"
-  });
-});
+// router.get("/secret", requireSignin, (req, res) => {
+//   res.json({
+//     user: req.user
+//   });
+// });
 
 module.exports = router;
