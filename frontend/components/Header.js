@@ -42,7 +42,21 @@ const Header = props => {
                 </NavItem>
               </React.Fragment>
             )}
-
+            
+            {isAuth() && isAuth().role === 0 && (
+              <NavItem>
+                <Link href="/user">
+                  <NavLink>{`${isAuth().name}`}'s Dashboard</NavLink>
+                </Link>
+              </NavItem>
+            )}
+            {isAuth() && isAuth().role === 1 && (
+              <NavItem>
+                <Link href="/admin">
+                  <NavLink>{`${isAuth().name}`}'s Dashboard</NavLink>
+                </Link>
+              </NavItem>
+            )}
             {isAuth() && (
               <NavItem>
                 <NavLink
