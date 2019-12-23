@@ -37,12 +37,15 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 // category routes
 const categoryRoutes = require("./routes/category");
+// tag routes
+const tagRoutes = require('./routes/tag');
 
 // routes middleware
 app.use("/api", blogRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
+app.use('/api', tagRoutes);
 
 // port
 const port = process.env.PORT || 8000;
