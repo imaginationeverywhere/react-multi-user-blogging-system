@@ -1,0 +1,6 @@
+a {
+  cursor: pointer;
+}
+#nprogress .bar {
+  height: 10px;
+}
