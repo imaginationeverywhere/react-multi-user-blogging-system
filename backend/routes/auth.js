@@ -7,7 +7,7 @@ const {
   signin,
   singout,
   requireSignin
-} = require("../contollers/auth");
+} = require("../controllers/auth");
 
 // validators
 const { runValidation } = require("../validators");

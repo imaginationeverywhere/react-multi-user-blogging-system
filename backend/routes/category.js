@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 // auth controllers
-const { requireSignin, adminMiddleware } = require("../contollers/auth");  
+const { requireSignin, adminMiddleware } = require("../controllers/auth");  
 // category controllers
-const { create, list, read, remove } = require("../contollers/category");
+const { create, list, read, remove } = require("../controllers/category");
 // validators
 const { runValidation } = require("../validators");
 // category validators

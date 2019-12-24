@@ -1,5 +1,5 @@
 const express = require("express");
-const { time } = require("../contollers/blog");
+const { time } = require("../controllers/blog");
 const router = express.Router();
 
 router.get("/", time);
