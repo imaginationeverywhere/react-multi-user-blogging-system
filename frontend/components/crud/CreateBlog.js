@@ -11,9 +11,22 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "../../node_modules/react-quill/dist/quill.snow.css";
 
 const CreateBlog = ({ router }) => {
-  const [body, setBody] = useState({});
+  const blogFromLS = () => {
+    // if the window is not available
+    if (typeof window === "undefined") {
+      return false;
+    }
 
-  const [values, setVaues] = useState({
+    if (localStorage.getItem("blog")) {
+      return JSON.parse(localStorage.getItem("blog"));
+    } else {
+      return false;
+    }
+  };
+
+  const [body, setBody] = useState(blogFromLS());
+
+  const [values, setValues] = useState({
     error: "",
     sizeError: "",
     success: "",
@@ -31,17 +44,29 @@ const CreateBlog = ({ router }) => {
     hidePublishButton
   } = values;
 
+  useEffect(() => {
+    setValues({ ...values, formData: new FormData() });
+  }, [router]);
+
   const publishBlog = e => {
     e.preventDefault();
     console.log("ready to publish blog");
   };
 
-  const handleChange = name => event => {
-    console.log(event.target.value);
+  const handleChange = name => e => {
+    // console.log(e.target.value);
+    const value = name === "photo" ? e.target.files[0] : e.target.value;
+    formData.set(name, value);
+    setValues({ ...values, [name]: value, formData, error: "" });
   };
 
   const handleBody = e => {
-    console.log(e);
+    // console.log(e);
+    setBody(e);
+    formData.set("body", e);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("blog", JSON.stringify(e));
+    }
   };
 
   const createBlogForm = () => {
@@ -75,36 +100,44 @@ const CreateBlog = ({ router }) => {
     );
   };
 
-  return <div>{createBlogForm()}</div>;
+  return (
+    <div>
+      {createBlogForm()}
+      <hr />
+      {JSON.stringify(title)}
+      <hr />
+      {JSON.stringify(body)}
+    </div>
+  );
 };
 
 CreateBlog.modules = {
   toolbar: [
-      [{ header: '1' }, { header: '2' }, { header: [3, 4, 5, 6] }, { font: [] }],
-      [{ size: [] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      ['link', 'image', 'video'],
-      ['clean'],
-      ['code-block']
+    [{ header: "1" }, { header: "2" }, { header: [3, 4, 5, 6] }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image", "video"],
+    ["clean"],
+    ["code-block"]
   ]
 };
 
 CreateBlog.formats = [
-  'header',
-  'font',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'link',
-  'image',
-  'video',
-  'code-block'
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "link",
+  "image",
+  "video",
+  "code-block"
 ];
 
 export default withRouter(CreateBlog);
