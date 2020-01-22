@@ -7,6 +7,7 @@ import { getCookie, isAuth } from "../../actions/auth";
 import { getCategories } from "../../actions/category";
 import { getTags } from "../../actions/tag";
 import { createBlog } from "../../actions/blog";
+import { QuillModules, QuillFormats } from "../../helpers/quill";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "../../node_modules/react-quill/dist/quill.snow.css";
 
@@ -50,7 +51,7 @@ const CreateBlog = ({ router }) => {
     hidePublishButton
   } = values;
 
-  const token = getCookie('token');
+  const token = getCookie("token");
 
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });
@@ -84,13 +85,18 @@ const CreateBlog = ({ router }) => {
     createBlog(formData, token).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
-      }else{
-        setValues({...values, title: '', error: '', success: `A new blog titled "${data.title}" is created`})
-        setBody('');
+      } else {
+        setValues({
+          ...values,
+          title: "",
+          error: "",
+          success: `A new blog titled "${data.title}" is created`
+        });
+        setBody("");
         setCategories([]);
         setTags([]);
       }
-    })
+    });
   };
 
   const handleChange = name => e => {
@@ -162,12 +168,34 @@ const CreateBlog = ({ router }) => {
       tags &&
       tags.map((t, i) => (
         <li key={i} className="list-unstyled">
-          <input onChange={handleToggleTag(t._id)} type="checkbox" className="mr-2" />
+          <input
+            onChange={handleToggleTag(t._id)}
+            type="checkbox"
+            className="mr-2"
+          />
           <label className="form-check-label">{t.name}</label>
         </li>
       ))
     );
   };
+
+  const showError = () => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className="alert alert-success"
+      style={{ display: success ? "" : "none" }}
+    >
+      {success}
+    </div>
+  );
 
   const createBlogForm = () => {
     return (
@@ -183,8 +211,8 @@ const CreateBlog = ({ router }) => {
 
         <div className="form-group">
           <ReactQuill
-            modules={CreateBlog.modules}
-            formats={CreateBlog.formats}
+            modules={QuillModules}
+            formats={QuillFormats}
             value={body}
             placeholder="Write something amazing..."
             onChange={handleBody}
@@ -205,14 +233,10 @@ const CreateBlog = ({ router }) => {
       <div className="row">
         <div className="col-md-8">
           {createBlogForm()}
-          <hr />
-          {JSON.stringify(title)}
-          <hr />
-          {JSON.stringify(body)}
-          <hr />
-          {JSON.stringify(categories)}
-          <hr />
-          {JSON.stringify(tags)}
+          <div className="pt-3">
+            {showError()}
+            {showSuccess()}
+          </div>
         </div>
 
         <div className="col-md-4">
@@ -220,17 +244,21 @@ const CreateBlog = ({ router }) => {
             <div className="form-group pb-2">
               <h5>Featured Image</h5>
               <small className="text-muted">Max size: 1mb</small>
-              <br/>
+              <br />
               <label className="btn btn-outline-info">
                 Upload Featured Image
-                <input type="file" accept="image/*" onChange={handleChange('photo')} hidden />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChange("photo")}
+                  hidden
+                />
               </label>
             </div>
           </div>
           <div>
             <h5>Categories</h5>
             <hr />
-
             <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
               {showCategories()}
             </ul>
@@ -247,34 +275,5 @@ const CreateBlog = ({ router }) => {
     </div>
   );
 };
-
-CreateBlog.modules = {
-  toolbar: [
-    [{ header: "1" }, { header: "2" }, { header: [3, 4, 5, 6] }, { font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image", "video"],
-    ["clean"],
-    ["code-block"]
-  ]
-};
-
-CreateBlog.formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "link",
-  "image",
-  "video",
-  "code-block"
-];
 
 export default withRouter(CreateBlog);
