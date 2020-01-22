@@ -1,0 +1,738 @@
+{
+	"info": {
+		"_postman_id": "2f2fef92-1dc1-4f3e-a5a8-a6187f9df605",
+		"name": "React Multi User Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Root API GET Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST user signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Amen Moja Ra\",\n\t\"email\": \"mojaray2k@live.com\",\n\t\"password\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"mojaray2k@gmail.com\",\n\t\"password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Signout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcxNTQ0MTYsImV4cCI6MTU3NzI0MDgxNn0.JNc8tORCdDmnPfVUBu0Oh3anGmNtgI3u1rHUzA5eQJ4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/signout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Example Protected Route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZjNDliOTczZGM5OThjYmVlMjU2ZjQiLCJpYXQiOjE1NzY4MTg0ODYsImV4cCI6MTU3NjkwNDg4Nn0.itXqB1WHPer55QT7KbcfzHEFSsTFDpfP3HX_IDJprBo",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/secret",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"secret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcyMDQ1NzcsImV4cCI6MTU3NzI5MDk3N30.99XAFOnQLtng_xWFElTDfaheXC9Xhp7E_7VVLobYH-g",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Category Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcxNTQ0MTYsImV4cCI6MTU3NzI0MDgxNn0.JNc8tORCdDmnPfVUBu0Oh3anGmNtgI3u1rHUzA5eQJ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"categoryfour\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Categories",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcxNTQ0MTYsImV4cCI6MTU3NzI0MDgxNn0.JNc8tORCdDmnPfVUBu0Oh3anGmNtgI3u1rHUzA5eQJ4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"categories"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single Category with Slug",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcxNTQ0MTYsImV4cCI6MTU3NzI0MDgxNn0.JNc8tORCdDmnPfVUBu0Oh3anGmNtgI3u1rHUzA5eQJ4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/category/categoryfour",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"category",
+						"categoryfour"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Single Category with Slug",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcxNTQ0MTYsImV4cCI6MTU3NzI0MDgxNn0.JNc8tORCdDmnPfVUBu0Oh3anGmNtgI3u1rHUzA5eQJ4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/category/categoryfour",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"category",
+						"categoryfour"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Tag Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcwODAwMzAsImV4cCI6MTU3NzE2NjQzMH0.tTqMlPXfGdBytOqM3IshaFILMt8bfnGs41K0kcoJ7i8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"tagone\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/tag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"tag"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Tag List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcwODAwMzAsImV4cCI6MTU3NzE2NjQzMH0.tTqMlPXfGdBytOqM3IshaFILMt8bfnGs41K0kcoJ7i8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"tag three\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single Tag using Slug",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcwODAwMzAsImV4cCI6MTU3NzE2NjQzMH0.tTqMlPXfGdBytOqM3IshaFILMt8bfnGs41K0kcoJ7i8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"tag three\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/tag/tagtwo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"tag",
+						"tagtwo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Single Tag using Slug",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1NzcwODAwMzAsImV4cCI6MTU3NzE2NjQzMH0.tTqMlPXfGdBytOqM3IshaFILMt8bfnGs41K0kcoJ7i8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"tag three\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/tag/tag-three",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"tag",
+						"tag-three"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create New Blog Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1Nzg0NTU1MjcsImV4cCI6MTU3ODU0MTkyN30.2p3okzhUXFSTkZ_fBZgVbAE_k35mZtFKwG2ofUsKl2c",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Blog Four",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "<p>Content of blog four </p> <p>At leaset one category is required. </p><p>At least one tag is required. .</p>\n<p>This blog also needs a title. </p><p>This blog also needs a photo.</p><p>This blog post also has a meta title</p><p>This blog post also has a meta descriiption</p>",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/Users/amenra/Sample-Code/REACT/react-node-next-multi-user-blogging-platform/1 images/hongkong-4454108_1280.jpg"
+						},
+						{
+							"key": "categories",
+							"value": "5e01d367499d281299be5abe",
+							"type": "text"
+						},
+						{
+							"key": "tags",
+							"value": "5e02318e499d281299be5ac8",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/blog",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"blog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Blog List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1Nzg0NTU1MjcsImV4cCI6MTU3ODU0MTkyN30.2p3okzhUXFSTkZ_fBZgVbAE_k35mZtFKwG2ofUsKl2c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/blogs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST get all blogs categories and tags",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1Nzg0NTU1MjcsImV4cCI6MTU3ODU0MTkyN30.2p3okzhUXFSTkZ_fBZgVbAE_k35mZtFKwG2ofUsKl2c",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api//blogs-categories-tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"",
+						"blogs-categories-tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single Blog",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZlY2I4NzZiYTZhZGJjOWUwNjc4ZDgiLCJpYXQiOjE1Nzg0NTU1MjcsImV4cCI6MTU3ODU0MTkyN30.2p3okzhUXFSTkZ_fBZgVbAE_k35mZtFKwG2ofUsKl2c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/api/blog/blog-post-2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"blog",
+						"blog-post-2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Single Blog",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "categories",
+							"value": "5e01d4cd499d281299be5ac6",
+							"type": "text"
+						},
+						{
+							"key": "tags",
+							"value": "5e2732be66c0d4554396addc",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/blog/blog-post-2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"blog",
+						"blog-post-2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
