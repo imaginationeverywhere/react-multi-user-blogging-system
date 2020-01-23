@@ -174,8 +174,8 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
 };
 
 exports.read = (req, res) => {
-    const slug = req.params.slug.toLowerCase();
-    Blog.findOne({slug})
+  const slug = req.params.slug.toLowerCase();
+  Blog.findOne({ slug })
     .populate("categories", "_id name slug")
     .populate("tags", "_id name slug")
     .populate("postedBy", "_id name username")
@@ -194,18 +194,18 @@ exports.read = (req, res) => {
 };
 
 exports.remove = (req, res) => {
-    const slug = req.params.slug.toLowerCase();
-    Blog.findOneAndRemove({slug}).exec((err, data) => {
-        if (err) {
-          return res.status(400).json({
-            error: errorHandler(err)
-          });
-        }
-  
-        res.json({
-            message: "Blog deleted successfully"
-        });
+  const slug = req.params.slug.toLowerCase();
+  Blog.findOneAndRemove({ slug }).exec((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err)
       });
+    }
+
+    res.json({
+      message: "Blog deleted successfully"
+    });
+  });
 };
 
 exports.update = (req, res) => {
@@ -254,7 +254,8 @@ exports.update = (req, res) => {
         }
         oldBlog.photo.data = fs.readFileSync(files.photo.path);
         oldBlog.photo.contentType = files.photo.type;
-   ``   }
+        ``;
+      }
 
       oldBlog.save((err, result) => {
         if (err) {
@@ -262,8 +263,24 @@ exports.update = (req, res) => {
             error: errorHandler(err)
           });
         }
-       res.json(result)
+        res.json(result);
       });
     });
   });
+};
+
+exports.photo = (req, res) => {
+  const slug = req.params.slug.toLowerCase();
+  Blog.findOne({ slug })
+    .select("photo")
+    .exec((err, blog) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler(err)
+        });
+      }
+
+      res.set("Content-Type", blog.photo.contentType);
+      return res.send(blog.photo.data);
+    });
 };
