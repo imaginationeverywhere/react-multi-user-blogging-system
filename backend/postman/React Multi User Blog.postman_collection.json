@@ -766,6 +766,28 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET Blog Photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/blog/photo/blog-post-4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"blog",
+						"photo",
+						"blog-post-4"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
