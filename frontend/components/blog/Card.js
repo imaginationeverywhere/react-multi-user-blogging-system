@@ -40,7 +40,16 @@ const Card = ({ blog }) => {
         <br />
       </section>
       <div className="row">
-        <div className="col-md-4">image</div>
+        <div className="col-md-4">
+          <section>
+            <img
+              style={{ maxHeight: "150px", width: "auto" }}
+              src={`${API}/blog/photo/${blog.slug}`}
+              className="img img-fluid"
+              alt={blog.title}
+            />
+          </section>
+        </div>
         <div className="col-md-8">
           <section>
             <div className="pb-3">{renderHTML(blog.excerpt)}</div>
