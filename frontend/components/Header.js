@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
-import NProgress from 'nprogress';
+import NProgress from "nprogress";
 import {
   Collapse,
   Navbar,
@@ -35,6 +35,14 @@ const Header = props => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
+            <React.Fragment>
+              <NavItem>
+                <Link href="/blogs">
+                  <NavLink>Blogs</NavLink>
+                </Link>
+              </NavItem>
+            </React.Fragment>
+
             {!isAuth() && (
               <React.Fragment>
                 <NavItem>
@@ -49,7 +57,7 @@ const Header = props => {
                 </NavItem>
               </React.Fragment>
             )}
-            
+
             {isAuth() && isAuth().role === 0 && (
               <NavItem>
                 <Link href="/user">
