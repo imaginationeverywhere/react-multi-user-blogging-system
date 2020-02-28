@@ -9,7 +9,12 @@ const { errorHandler } = require("../helpers/dbErrorHandler");
 const fs = require("fs");
 const { smartTrim } = require("../helpers/blog");
 
-exports.create = (req, res) => {
+/**
+ * @function create
+ * @param {*} req
+ * @param {*} res
+ */
+const create = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
@@ -103,7 +108,12 @@ exports.create = (req, res) => {
   });
 };
 
-exports.list = (req, res) => {
+/**
+ * @function list
+ * @param {*} req
+ * @param {*} res
+ */
+const list = (req, res) => {
   Blog.find({})
     .populate("categories", "_id name slug")
     .populate("tags", "_id name slug")
@@ -122,7 +132,12 @@ exports.list = (req, res) => {
     });
 };
 
-exports.listAllBlogsCategoriesTags = (req, res) => {
+/**
+ * @function listAllBlogsCategoriesTags
+ * @param {*} req
+ * @param {*} res
+ */
+const listAllBlogsCategoriesTags = (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 10;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
@@ -173,7 +188,12 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
     });
 };
 
-exports.read = (req, res) => {
+/**
+ * @function read
+ * @param {*} req
+ * @param {*} res
+ */
+const read = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Blog.findOne({ slug })
     .populate("categories", "_id name slug")
@@ -193,7 +213,12 @@ exports.read = (req, res) => {
     });
 };
 
-exports.remove = (req, res) => {
+/**
+ * @function remove
+ * @param {*} req
+ * @param {*} res
+ */
+const remove = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Blog.findOneAndRemove({ slug }).exec((err, data) => {
     if (err) {
@@ -208,7 +233,12 @@ exports.remove = (req, res) => {
   });
 };
 
-exports.update = (req, res) => {
+/**
+ * @function update
+ * @param {*} req
+ * @param {*} res
+ */
+const update = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Blog.findOne({ slug }).exec((err, oldBlog) => {
     if (err) {
@@ -269,7 +299,12 @@ exports.update = (req, res) => {
   });
 };
 
-exports.photo = (req, res) => {
+/**
+ * @function photo
+ * @param {*} req
+ * @param {*} res
+ */
+const photo = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Blog.findOne({ slug })
     .select("photo")
@@ -285,23 +320,39 @@ exports.photo = (req, res) => {
     });
 };
 
-exports.listRelated = (req, res) => {
+/**
+ * @function listRelated
+ * @param {*} req
+ * @param {*} res
+ */
+const listRelated = (req, res) => {
   // console.log(req.body.blog);
   let limit = req.body.limit ? parseInt(req.body.limit) : 3;
-  const {_id, categories} = req.body.blog;
+  const { _id, categories } = req.body.blog;
 
   // $ne means don't include the id of this blog
   // $in means include the categories of this blog
-  Blog.find({_id: {$ne: _id}, categories: {$in: categories}})
-  .limit(limit)
-  .populate('postedBy', '_id name profile')
-  .select('title slug excerpt postedBy createdAt updatedAt')
-  .exec((err, blogs) => {
-    if (err) {
-      return res.status(400).json({
-        error: 'Blogs not found'
-      });
-    }
-    res.json(blogs);
-  })
-}
+  Blog.find({ _id: { $ne: _id }, categories: { $in: categories } })
+    .limit(limit)
+    .populate("postedBy", "_id name profile")
+    .select("title slug excerpt postedBy createdAt updatedAt")
+    .exec((err, blogs) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Blogs not found"
+        });
+      }
+      res.json(blogs);
+    });
+};
+
+module.exports = {
+  create,
+  list,
+  listAllBlogsCategoriesTags,
+  read,
+  remove,
+  update,
+  photo,
+  listRelated
+};

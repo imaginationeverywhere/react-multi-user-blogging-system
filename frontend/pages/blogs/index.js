@@ -1,12 +1,37 @@
 import Head from "next/head";
 import Link from "next/link";
 import { withRouter } from "next/router";
-import Layout from "../../components/Layout";
 import { useState } from "react";
-import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
+import Layout from "../../components/Layout";
+import { DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
 import { listBlogsWithCategoriesAndTags } from "../../actions/blog";
 import Card from "../../components/blog/Card";
 
+/**
+ * @file Blog Listing Page
+ * @function Blogs
+ * @param {*} props
+ * @param {props} props.blogs
+ * @param {props} props.categories
+ * @param {props} props.tags
+ * @param {props} props.totalBlogs
+ * @param {props} props.blogsLimit
+ * @param {props} props.blogsSkipped
+ * @param {props} props.router
+ * @external <Head/>
+ * @external <Link/>
+ * @external withRouter
+ * @external useState
+ * @requires <layout/>
+ * @requires DOMAIN
+ * @requires APP_NAME
+ * @requires FB_APP_ID
+ * @requires listBlogsWithCategoriesAndTags
+ * @requires <Card/>
+ * @returns {Blog Listing Page}
+ * @summary Like Wordpress this page displays a list of most recent blogs.
+ * @author Amen Ra
+ */
 const Blogs = ({
   blogs,
   categories,
@@ -151,7 +176,7 @@ const Blogs = ({
 
 Blogs.getInitialProps = () => {
   let skip = 0;
-  let limit = 2;
+  let limit = 10;
 
   return listBlogsWithCategoriesAndTags(skip, limit).then(data => {
     if (data.error) {

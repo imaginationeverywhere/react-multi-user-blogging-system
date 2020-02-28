@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Router from "next/router";
 import dynamic from "next/dynamic";
 import { withRouter } from "next/router";
@@ -12,6 +11,14 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import { API } from "../../config";
 
+/**
+ * @file Update Blog Compoent
+ * @function UpdateBlog
+ * @param {*} props
+ * @param {props} props.router
+ * @returns {<UpdateBlog />}
+ * @author Amen Ra
+ */
 const UpdateBlog = ({ router }) => {
   const [body, setBody] = useState("");
 

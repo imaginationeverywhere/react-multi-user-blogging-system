@@ -2,7 +2,19 @@ import Layout from "../../components/Layout";
 import Admin from "../../components/auth/Admin";
 import Link from "next/link";
 
-const AdminIndex = () => {
+/**
+ * @file Admin Dashboard Page
+ * @function AdminIndex
+ * @param {*} props
+ * @requires <Layout/>
+ * @requires <Admin/>
+ * @requires <Link/>
+ * @returns {Admin Dashboard page}
+ * @summary From this page you will be as an admin user to create,
+ * update, or delete a blog, tag, or category.
+ * @author Amen Ra
+ */
+const AdminIndex = props => {
   return (
     <Layout>
       <Admin>

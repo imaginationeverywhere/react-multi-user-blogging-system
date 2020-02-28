@@ -8,9 +8,28 @@ import renderHTML from "react-render-html";
 import moment from "moment";
 import SmallCard from "../../components/blog/SmallCard";
 
+/**
+ * @file React Single Blog Page
+ * @function SingleBlog
+ * @param {*} props
+ * @param {props} props.blog
+ * @param {props} props.query
+ * @returns {SingleBlog} Next.js Page
+ * @author Amen Ra
+ */
 const SingleBlog = ({ blog, query }) => {
+  /**
+   * @function useState
+   * React hook that has an @Array of related[] and to add more use @function setRelated
+   */
   const [related, setRelated] = useState([]);
 
+  /**
+   * @function loadRelated
+   * @requires listRelated
+   * @returns {void}
+   * @summary Fetches list of blogs
+   */
   const loadRelated = () => {
     listRelated({ blog }).then(data => {
       if (data.error) {
@@ -21,10 +40,18 @@ const SingleBlog = ({ blog, query }) => {
     });
   };
 
+  /**
+   * @function useEffect
+   * React hook equivalent to componentDidMount, loads the Related Blogs data once the component is rendered on the page
+   */
   useEffect(() => {
     loadRelated();
   }, []);
 
+  /**
+   * @function head
+   * @returns {<Head> compoennt} with a Blog Title, App Name, Blog Description, Canoncal URL, Facebook App ID
+   */
   const head = () => (
     <Head>
       <title>
@@ -48,6 +75,14 @@ const SingleBlog = ({ blog, query }) => {
     </Head>
   );
 
+  /**
+   * @function showBlogCategories
+   * @param {*} blog this is a prop on the parent SingleBlog
+   * @property blog categories
+   * This maps through the categories object and returns an array of categories associated
+   * with this particular blog
+   * @returns {<Link /> component} with the category slug and category name
+   */
   const showBlogCategories = blog =>
     blog.categories.map((c, i) => (
       <Link key={i} href={`/categories/${c.slug}`}>
@@ -55,6 +90,14 @@ const SingleBlog = ({ blog, query }) => {
       </Link>
     ));
 
+  /**
+   * @function showBlogTags
+   * @param {*} blog this is a prop on the parent SingleBlog
+   * @property blog tags
+   * This maps through the tags object and returns an array of tags associated
+   * with this particular blog
+   * @returns {<Link /> component} with the tag slug and tag name
+   */
   const showBlogTags = blog =>
     blog.tags.map((t, i) => (
       <Link key={i} href={`/tags/${t.slug}`}>
@@ -62,6 +105,10 @@ const SingleBlog = ({ blog, query }) => {
       </Link>
     ));
 
+  /**
+   * @function showRelatedBlog
+   * @returns {<SmallCard component} for each blog that is associated with this blog
+   */
   const showRelatedBlog = () => {
     return related.map((blog, i) => (
       <div className="col-md-4" key={i}>
@@ -133,6 +180,12 @@ const SingleBlog = ({ blog, query }) => {
   );
 };
 
+/**
+ * @method SingleBlog
+ * @property {getInitialProps}
+ * @argument {query}
+ * @returns {singleBlog} action
+ */
 SingleBlog.getInitialProps = ({ query }) => {
   return singleBlog(query.slug).then(data => {
     if (data.error) {

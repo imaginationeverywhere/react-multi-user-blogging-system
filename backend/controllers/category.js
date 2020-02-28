@@ -3,7 +3,12 @@ const Blog = require("../models/blog");
 const slugify = require("slugify");
 const { errorHandler } = require("../helpers/dbErrorhandler");
 
-exports.create = (req, res) => {
+/**
+ * @function create
+ * @param {*} req
+ * @param {*} res
+ */
+const create = (req, res) => {
   const { name } = req.body;
   let slug = slugify(name).toLowerCase();
 
@@ -19,7 +24,12 @@ exports.create = (req, res) => {
   });
 };
 
-exports.list = (req, res) => {
+/**
+ * @function list
+ * @param {*} req
+ * @param {*} res
+ */
+const list = (req, res) => {
   Category.find({}).exec((err, data) => {
     if (err) {
       return res.status(400).json({
@@ -29,7 +39,13 @@ exports.list = (req, res) => {
     res.json(data);
   });
 };
-exports.read = (req, res) => {
+
+/**
+ * @function read
+ * @param {*} req
+ * @param {*} res
+ */
+const read = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Category.findOne({ slug }).exec((err, category) => {
     if (err) {
@@ -55,7 +71,13 @@ exports.read = (req, res) => {
       });
   });
 };
-exports.remove = (req, res) => {
+
+/**
+ * @function remove
+ * @param {*} req
+ * @param {*} res
+ */
+const remove = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Category.findOneAndRemove({ slug }).exec((err, data) => {
     if (err) {
@@ -67,4 +89,11 @@ exports.remove = (req, res) => {
       message: "Category deleted successfully"
     });
   });
+};
+
+module.exports = {
+  create,
+  list,
+  read,
+  remove
 };

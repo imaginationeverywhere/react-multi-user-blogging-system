@@ -2,7 +2,18 @@ import Layout from "../../../components/Layout";
 import Admin from "../../../components/auth/Admin";
 import ReadBlogs from "../../../components/crud/ReadBlogs";
 
-const Blogs = () => {
+/**
+ * @file Manage Blogs Page
+ * @function Blogs
+ * @param {*} props
+ * @requires <Layout/>
+ * @requires <Admin/>
+ * @requires <ReadBlogs/>
+ * @returns {Manage Blogs Page}
+ * @summary This page allows you to either Update of Delete Blogs
+ * @author Amen Ra
+ */
+const Blogs = props => {
   return (
     <Layout>
       <Admin>

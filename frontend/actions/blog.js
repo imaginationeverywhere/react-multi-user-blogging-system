@@ -1,6 +1,11 @@
 import fetch from "isomorphic-fetch";
 import { API } from "../config";
 
+/**
+ * @function createBlog
+ * @param {*} blog
+ * @param {*} token
+ */
 export const createBlog = (blog, token) => {
   return fetch(`${API}/blog`, {
     method: "POST",
@@ -16,6 +21,11 @@ export const createBlog = (blog, token) => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function listBlogsWIthCategoriesAndTags
+ * @param {*} skip
+ * @param {*} limit
+ */
 export const listBlogsWithCategoriesAndTags = (skip, limit) => {
   const data = {
     limit,
@@ -35,6 +45,10 @@ export const listBlogsWithCategoriesAndTags = (skip, limit) => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function SingleBlog
+ * @param {*} slug
+ */
 export const singleBlog = slug => {
   return fetch(`${API}/blog/${slug}`, {
     method: "GET"
@@ -45,6 +59,10 @@ export const singleBlog = slug => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function listRelated
+ * @param {*} blog
+ */
 export const listRelated = blog => {
   return fetch(`${API}/blogs/related`, {
     method: "POST",
@@ -60,6 +78,9 @@ export const listRelated = blog => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function list
+ */
 export const list = () => {
   return fetch(`${API}/blogs`, {
     method: "GET"
@@ -70,6 +91,11 @@ export const list = () => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function removeBlog
+ * @param {*} slug
+ * @param {*} token
+ */
 export const removeBlog = (slug, token) => {
   return fetch(`${API}/blog/${slug}`, {
     method: "DELETE",
@@ -85,6 +111,12 @@ export const removeBlog = (slug, token) => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function updateBlog
+ * @param {*} blog
+ * @param {*} token
+ * @param {*} slug
+ */
 export const updateBlog = (blog, token, slug) => {
   return fetch(`${API}/blog/${slug}`, {
     method: "PUT",

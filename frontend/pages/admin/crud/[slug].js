@@ -2,7 +2,17 @@ import Layout from "../../../components/Layout";
 import Admin from "../../../components/auth/Admin";
 import UpdateBlog from "../../../components/crud/updateBlog";
 
-const Blog = () => {
+/**
+ * @file Update Single Blog Page
+ * @function Blog
+ * @param {*} props
+ * @requires <Layout/>
+ * @requires <Admin/>
+ * @requires <UpdateBlog/>
+ * @returns {Update Single Blog Page}
+ * @author Amen Ra
+ */
+const Blog = props => {
   return (
     <Layout>
       <Admin>

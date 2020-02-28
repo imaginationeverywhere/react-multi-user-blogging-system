@@ -1,16 +1,35 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Router from "next/router";
 import dynamic from "next/dynamic";
 import { withRouter } from "next/router";
-import { getCookie, isAuth } from "../../actions/auth";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import { getCookie } from "../../actions/auth";
 import { getCategories } from "../../actions/category";
 import { getTags } from "../../actions/tag";
 import { createBlog } from "../../actions/blog";
 import { QuillModules, QuillFormats } from "../../helpers/quill";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "../../node_modules/react-quill/dist/quill.snow.css";
 
+/**
+ * @file Create Blog Component
+ * @function CreateBlog
+ * @param {*} props
+ * @param {props} props.router
+ * @external useState
+ * @external useEffect
+ * @external dynamic
+ * @external withRouter
+ * @external ReactQuill
+ * @requires getCookie
+ * @requires getCategories
+ * @requires getTags
+ * @requires createBlog
+ * @requires QuillModules
+ * @requires QuillFormates
+ * @returns {<CreateBlog />}
+ * @summary This component is used on the Create Blog Page
+ * {@link frontend/pages/admin/crud/blog.js}
+ * @author Amen Ra
+ */
 const CreateBlog = ({ router }) => {
   const blogFromLS = () => {
     // if the window is not available

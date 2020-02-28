@@ -1,11 +1,27 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Router from "next/router";
+import moment from "moment";
 import { getCookie, isAuth } from "../../actions/auth";
 import { list, removeBlog } from "../../actions/blog";
-import moment from "moment";
 
-const ReadBlogs = () => {
+/**
+ * @file ReadBlogs Component
+ * @function Readblogs
+ * @param {*} props
+ * @external useState
+ * @external useEffect
+ * @external Link
+ * @external moment
+ * @requires getCookie
+ * @requires isAuth
+ * @requires list
+ * @requires removeBlog
+ * @returns {<ReadBlogs />}
+ * @summary This is the compoent that is used on the Managed Blogs Page
+ * {@link frontend/pages/admin/crud/blogs.js}
+ * @author Amen Ra
+ */
+const ReadBlogs = props => {
   const [blogs, setBlogs] = useState([]);
   const [message, setMessage] = useState("");
   const token = getCookie("token");

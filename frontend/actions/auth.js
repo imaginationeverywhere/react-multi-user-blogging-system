@@ -2,6 +2,10 @@ import fetch from "isomorphic-fetch";
 import cookie from "js-cookie";
 import { API } from "../config";
 
+/**
+ * @function signup
+ * @param {*} user
+ */
 export const signup = user => {
   return fetch(`${API}/signup`, {
     method: "POST",
@@ -17,6 +21,10 @@ export const signup = user => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function signin
+ * @param {*} user
+ */
 export const signin = user => {
   return fetch(`${API}/signin`, {
     method: "POST",
@@ -32,6 +40,10 @@ export const signin = user => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function signout
+ * @param {*} next
+ */
 export const signout = next => {
   removeCookie("token");
   removeLocalStorage("user");
@@ -46,7 +58,11 @@ export const signout = next => {
     .catch(err => console.log(err));
 };
 
-// TODO: set cookie
+/**
+ * @function setCookie
+ * @param {*} key
+ * @param {*} value
+ */
 export const setCookie = (key, value) => {
   if (process.browser) {
     cookie.set(key, value, {
@@ -55,7 +71,10 @@ export const setCookie = (key, value) => {
   }
 };
 
-// TODO: remove cookie
+/**
+ * @function removeCookie
+ * @param {*} key
+ */
 export const removeCookie = key => {
   if (process.browser) {
     cookie.remove(key, {
@@ -64,35 +83,53 @@ export const removeCookie = key => {
   }
 };
 
-// TODO: get cookie
+/**
+ * @function getCookie
+ * @param {*} key
+ */
 export const getCookie = key => {
   if (process.browser) {
     return cookie.get(key);
   }
 };
 
-// TODO: setLocalStorage
+/**
+ * @function setLocalStorage
+ * @param {*} key
+ * @param {*} value
+ */
 export const setLocalStorage = (key, value) => {
   if (process.browser) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 };
 
-// TODO: removeLocalStorage
+/**
+ * @function removeLocalStorage
+ * @param {*} key
+ */
 export const removeLocalStorage = key => {
   if (process.browser) {
     localStorage.removeItem(key);
   }
 };
 
-// TODO: authenticate user by pass data to cookie and localstorage
+/**
+ * @function authenticate
+ * @param {*} data
+ * @param {*} next
+ * authenticate user by pass data to cookie and localstorage
+ */
 export const authenticate = (data, next) => {
   setCookie("token", data.token);
   setLocalStorage("user", data.user);
   next();
 };
 
-// TODO: show the user is logged in or is authenticated 
+/**
+ * @function isAuth
+ * show the user is logged in or is authenticated
+ */
 export const isAuth = () => {
   if (process.browser) {
     const cookieChecked = getCookie("token");
