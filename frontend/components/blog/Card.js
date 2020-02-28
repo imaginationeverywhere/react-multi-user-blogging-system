@@ -43,7 +43,7 @@ const Card = ({ blog }) => {
         <div className="col-md-4">
           <section>
             <img
-              style={{ maxHeight: "150px", width: "auto" }}
+              style={{ maxHeight: "auto", width: "100%" }}
               src={`${API}/blog/photo/${blog.slug}`}
               className="img img-fluid"
               alt={blog.title}
