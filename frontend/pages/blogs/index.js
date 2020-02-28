@@ -125,13 +125,6 @@ const Blogs = ({
                   Diversity Developers Blogs and Tutorials
                 </h1>
               </div>
-              <section>
-                <div className="pb-5 text-center">
-                  {showAllCategories()}
-                  <br />
-                  {showAllTags()}
-                </div>
-              </section>
             </header>
           </div>
           {/* Show the initial number of 2 blogs with the showAllBlog function */}
@@ -140,6 +133,16 @@ const Blogs = ({
           <div className="container-fluid">{showLoadedBlogs()}</div>
           {/* Fires the event to load more blogs */}
           <div className="text-center pt-5 pb-5">{loadMoreButton()}</div>
+          <section>
+            <div className="pb-5 text-center">
+              <h2> Categories</h2>
+              {showAllCategories()}
+              <br />
+              <br />
+              <h2>Tags</h2>
+              {showAllTags()}
+            </div>
+          </section>
         </main>
       </Layout>
     </React.Fragment>
