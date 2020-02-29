@@ -50,7 +50,8 @@ const SingleBlog = ({ blog, query }) => {
 
   /**
    * @function head
-   * @returns {<Head> compoennt} with a Blog Title, App Name, Blog Description, Canoncal URL, Facebook App ID
+   * @returns {Head}
+   * @description A <Head> Component with a Blog Title, App Name, Blog Description, Canoncal URL, Facebook App ID
    */
   const head = () => (
     <Head>
@@ -181,10 +182,11 @@ const SingleBlog = ({ blog, query }) => {
 };
 
 /**
- * @method SingleBlog
+ * @function SingleBlog
  * @property {getInitialProps}
  * @argument {query}
- * @returns {singleBlog} action
+ * @method singleBlog
+ * @returns {data, query}
  */
 SingleBlog.getInitialProps = ({ query }) => {
   return singleBlog(query.slug).then(data => {

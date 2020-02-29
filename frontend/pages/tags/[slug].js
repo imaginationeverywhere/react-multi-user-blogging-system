@@ -3,16 +3,16 @@ import Link from "next/link";
 import renderHTML from "react-render-html";
 import moment from "moment";
 import Layout from "../../components/Layout";
-import { singleCategory } from "../../actions/category";
+import { singleTag } from "../../actions/tag";
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
 
 import Card from "../../components/blog/Card";
 
 /**
- * @file Signle Category Page
- * @function Category
+ * @file Signle Tag Page
+ * @function Tag
  * @param {*} props
- * @param {props} props.category
+ * @param {props} props.tag
  * @param {props} props.blogs
  * @external renderHTML
  * @external moment
@@ -20,13 +20,13 @@ import Card from "../../components/blog/Card";
  * @external <Link/>
  * @requires <Layout/>
  * @requires <Card/>
- * @requires SingleCategory
- * @returns {Single Category Page}
+ * @requires singleTag
+ * @returns {Single Tag Page}
  * @summary This page diplays all the information related to a particular category
  * including blogs associated with it
  * @author Amen Ra
  */
-const Category = ({ category, blogs, query }) => {
+const Tag = ({ tag, blogs, query }) => {
   /**
    * @function head
    * @returns {Head}
@@ -35,20 +35,17 @@ const Category = ({ category, blogs, query }) => {
   const head = () => (
     <Head>
       <title>
-        {category.name} | {APP_NAME}
+        {tag.name} | {APP_NAME}
       </title>
-      <meta
-        name="description"
-        content={`This is the page ${category.name} category`}
-      />
-      <link rel="canonical" href={`${DOMAIN}/categories/${query.slug}`} />
-      <meta property="og:title" content={`${category.name}| ${APP_NAME}`} />
+      <meta name="description" content={`This is the page ${tag.name} tage`} />
+      <link rel="canonical" href={`${DOMAIN}/tags/${query.slug}`} />
+      <meta property="og:title" content={`${tag.name}| ${APP_NAME}`} />
       <meta
         property="og:description"
-        content={`This is the page ${category.name} category`}
+        content={`This is the page ${tag.name} tag`}
       />
       <meta property="og:type" content="webiste" />
-      <meta property="og:url" content={`${DOMAIN}/categories/${query.slug}`} />
+      <meta property="og:url" content={`${DOMAIN}/tags/${query.slug}`} />
       <meta property="og:site_name" content={`${APP_NAME}`} />
 
       <meta
@@ -71,8 +68,8 @@ const Category = ({ category, blogs, query }) => {
           <div className="container-fluid text-center">
             <header>
               <div className="col-md-12 pt-3">
-                <h1 className="display-4 font-weight-bold">{category.name}</h1>
-                <h5>Blogs associated with the category are listed below</h5>
+                <h1 className="display-4 font-weight-bold">{tag.name}</h1>
+                <h5>Blogs associated with the tag are listed below</h5>
                 {blogs.map((b, i) => (
                   <div key={i}>
                     <Card blog={b} />
@@ -94,14 +91,14 @@ const Category = ({ category, blogs, query }) => {
  * @method singleCategory
  * @returns {data.category, data.blogs, query}
  */
-Category.getInitialProps = ({ query }) => {
-  return singleCategory(query.slug).then(data => {
+Tag.getInitialProps = ({ query }) => {
+  return singleTag(query.slug).then(data => {
     if (data.error) {
       console.log(data.error);
     } else {
-      return { category: data.category, blogs: data.blogs, query };
+      return { tag: data.tag, blogs: data.blogs, query };
     }
   });
 };
 
-export default Category;
+export default Tag;
