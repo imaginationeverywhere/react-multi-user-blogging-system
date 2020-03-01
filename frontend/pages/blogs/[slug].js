@@ -41,8 +41,16 @@ const SingleBlog = ({ blog, query }) => {
   };
 
   /**
-   * @function useEffect
-   * React hook equivalent to componentDidMount, loads the Related Blogs data once the component is rendered on the page
+   * @external useEffect
+   * @fires loadRelated
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the compoennt is mounted and
+   * loads a list of related blogs.
    */
   useEffect(() => {
     loadRelated();
@@ -50,8 +58,8 @@ const SingleBlog = ({ blog, query }) => {
 
   /**
    * @function head
-   * @returns {Head}
-   * @description A <Head> Component with a Blog Title, App Name, Blog Description, Canoncal URL, Facebook App ID
+   * @returns {hmtl}
+   * @summary A an html head tag
    */
   const head = () => (
     <Head>
@@ -78,11 +86,12 @@ const SingleBlog = ({ blog, query }) => {
 
   /**
    * @function showBlogCategories
-   * @param {*} blog this is a prop on the parent SingleBlog
-   * @property blog categories
-   * This maps through the categories object and returns an array of categories associated
-   * with this particular blog
-   * @returns {<Link /> component} with the category slug and category name
+   * @param {object} blog this is a prop on the parent SingleBlog
+   * @property {array} @var blog.categories
+   * @returns {html}
+   * @description Renders the tag slug and tag name
+   * @summary This maps through the categories object and returns an
+   * array of categories associated  with this particular blog
    */
   const showBlogCategories = blog =>
     blog.categories.map((c, i) => (
@@ -93,11 +102,12 @@ const SingleBlog = ({ blog, query }) => {
 
   /**
    * @function showBlogTags
-   * @param {*} blog this is a prop on the parent SingleBlog
-   * @property blog tags
-   * This maps through the tags object and returns an array of tags associated
-   * with this particular blog
-   * @returns {<Link /> component} with the tag slug and tag name
+   * @param {object} blog this is a prop on the parent SingleBlog
+   * @property {array} @var blog.tags
+   * @returns {html}
+   * @description Renders the tag slug and tag name
+   * @summary This maps through the tags object and returns an
+   * array of tags associated  with this particular blog
    */
   const showBlogTags = blog =>
     blog.tags.map((t, i) => (
@@ -108,7 +118,8 @@ const SingleBlog = ({ blog, query }) => {
 
   /**
    * @function showRelatedBlog
-   * @returns {<SmallCard component} for each blog that is associated with this blog
+   * @returns {html}
+   * @summary Renders each blog that is associated with this blog
    */
   const showRelatedBlog = () => {
     return related.map((blog, i) => (
@@ -184,7 +195,6 @@ const SingleBlog = ({ blog, query }) => {
 /**
  * @function SingleBlog
  * @property {getInitialProps}
- * @argument {query}
  * @method singleBlog
  * @returns {data, query}
  */

@@ -6,12 +6,13 @@ import Tag from "../../../components/crud/Tag";
 /**
  * @file Manage Categories and Tags
  * @function CategoryTag
- * @param {*} props
- * @requires <Layout/>
- * @requires <Admin/>
- * @requires <Category/>
- * @requires <Tag/>
- * @returns {Page to manage categories and tags}
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires Category
+ * @requires Tag
+ * @returns {html}
+ * @summary Renders the links that navigate to the Manage Categories and Tags Page
  * @author Amen Ra
  */
 const CategoryTag = props => {

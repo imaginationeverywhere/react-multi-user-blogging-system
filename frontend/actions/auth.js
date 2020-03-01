@@ -5,6 +5,7 @@ import { API } from "../config";
 /**
  * @function signup
  * @param {*} user
+ * @returns {void}
  */
 export const signup = user => {
   return fetch(`${API}/signup`, {
@@ -24,6 +25,7 @@ export const signup = user => {
 /**
  * @function signin
  * @param {*} user
+ * @returns {void}
  */
 export const signin = user => {
   return fetch(`${API}/signin`, {
@@ -43,6 +45,7 @@ export const signin = user => {
 /**
  * @function signout
  * @param {*} next
+ * @returns {void}
  */
 export const signout = next => {
   removeCookie("token");
@@ -62,6 +65,7 @@ export const signout = next => {
  * @function setCookie
  * @param {*} key
  * @param {*} value
+ * @returns {void}
  */
 export const setCookie = (key, value) => {
   if (process.browser) {
@@ -74,6 +78,7 @@ export const setCookie = (key, value) => {
 /**
  * @function removeCookie
  * @param {*} key
+ * @returns {void}
  */
 export const removeCookie = key => {
   if (process.browser) {
@@ -86,6 +91,7 @@ export const removeCookie = key => {
 /**
  * @function getCookie
  * @param {*} key
+ * @returns {String}
  */
 export const getCookie = key => {
   if (process.browser) {
@@ -97,6 +103,7 @@ export const getCookie = key => {
  * @function setLocalStorage
  * @param {*} key
  * @param {*} value
+ * @returns {void}
  */
 export const setLocalStorage = (key, value) => {
   if (process.browser) {
@@ -107,6 +114,7 @@ export const setLocalStorage = (key, value) => {
 /**
  * @function removeLocalStorage
  * @param {*} key
+ * @returns {void}
  */
 export const removeLocalStorage = key => {
   if (process.browser) {
@@ -118,7 +126,8 @@ export const removeLocalStorage = key => {
  * @function authenticate
  * @param {*} data
  * @param {*} next
- * authenticate user by pass data to cookie and localstorage
+ * @returns {void}
+ * @summary authenticate user by pass data to cookie and localstorage
  */
 export const authenticate = (data, next) => {
   setCookie("token", data.token);
@@ -128,7 +137,8 @@ export const authenticate = (data, next) => {
 
 /**
  * @function isAuth
- * show the user is logged in or is authenticated
+ * @returns {boolean || string}
+ * @summary show the user is logged in or is authenticated
  */
 export const isAuth = () => {
   if (process.browser) {

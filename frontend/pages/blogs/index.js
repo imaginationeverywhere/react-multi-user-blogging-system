@@ -10,25 +10,25 @@ import Card from "../../components/blog/Card";
 /**
  * @file Blog Listing Page
  * @function Blogs
- * @param {*} props
- * @param {props} props.blogs
- * @param {props} props.categories
- * @param {props} props.tags
- * @param {props} props.totalBlogs
- * @param {props} props.blogsLimit
- * @param {props} props.blogsSkipped
- * @param {props} props.router
- * @external <Head/>
- * @external <Link/>
+ * @param {object} props
+ * @param {object} props.blogs
+ * @param {array} props.categories
+ * @param {array} props.tags
+ * @param {number} props.totalBlogs
+ * @param {number} props.blogsLimit
+ * @param {number} props.blogsSkipped
+ * @param {object} props.router
+ * @external Head
+ * @external Link
  * @external withRouter
  * @external useState
- * @requires <layout/>
+ * @requires Layout
  * @requires DOMAIN
  * @requires APP_NAME
  * @requires FB_APP_ID
  * @requires listBlogsWithCategoriesAndTags
- * @requires <Card/>
- * @returns {Blog Listing Page}
+ * @requires Card
+ * @returns {html}
  * @summary Like Wordpress this page displays a list of most recent blogs.
  * @author Amen Ra
  */

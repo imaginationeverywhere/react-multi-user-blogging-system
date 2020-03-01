@@ -16,10 +16,16 @@ import { signin, authenticate, isAuth } from "../../actions/auth";
  * @method showLoading
  * @method showError
  * @method showMessage
- * @returns {SigninComponent} Renders a React Sign In Component html and css code
+ * @returns {html}
+ * @summary Renders a React Sign In Component html and css code
  * @author Amen Ra
  */
 const SigninComponent = () => {
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {object} @var values
+   * @type {function} @function setValues @returns {void}
+   */
   const [values, setValues] = useState({
     email: "mojaray2k@gmail.com",
     password: "password",
@@ -30,25 +36,28 @@ const SigninComponent = () => {
   });
 
   /**
-   * @constant {values}
-   * @type {string <email>}
-   * @type {string <password>}
-   * @type {string <error>}
-   * @type {boolean <loading>}
-   * @type {string <message>}
-   * @type {function <showForm>}
+   * @constant {object} values
+   * @type {string} @var email
+   * @type {string} @var password
+   * @type {string} @var error
+   * @type {boolean} @var loading
+   * @type {string} @var message
+   * @type {function} @function howForm
    */
   const { email, password, error, loading, message, showForm } = values;
 
   /**
-   * @method useEffect
-   * @method isAuth
-   * @method Router.push
-   * @summary redirect user to home page
-   * is they try to go to the "/signin" route
-   * and they are already signed in
-   * {@link https://reactjs.org/docs/hooks-effect.html React}
-   * @return {void}
+   * @external useEffect
+   * @fires isAuth
+   * @fires Router.push
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the componet is mounted and redirects the user to home page
+   * is they try to go to the "/signin" route and they are already signed in
    */
   useEffect(() => {
     isAuth() && Router.push("/");

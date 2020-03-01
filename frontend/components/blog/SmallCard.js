@@ -9,7 +9,8 @@ import { API } from "../../config";
  * @external moment
  * @requires API
  * @param {*} this.props.blog
- * @returns {SmallCard} Renders html and css for React SmallCard Component
+ * @returns {html}
+ * @summary Renders html and css for React SmallCard Component
  * @author Amen Ra
  */
 const SmallCard = ({ blog }) => {

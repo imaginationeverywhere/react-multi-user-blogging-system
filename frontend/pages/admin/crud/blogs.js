@@ -5,12 +5,12 @@ import ReadBlogs from "../../../components/crud/ReadBlogs";
 /**
  * @file Manage Blogs Page
  * @function Blogs
- * @param {*} props
- * @requires <Layout/>
- * @requires <Admin/>
- * @requires <ReadBlogs/>
- * @returns {Manage Blogs Page}
- * @summary This page allows you to either Update of Delete Blogs
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires ReadBlogs
+ * @returns {html}
+ * @summary This renders the Manage Blogs page
  * @author Amen Ra
  */
 const Blogs = props => {

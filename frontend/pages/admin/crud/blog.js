@@ -5,11 +5,13 @@ import CreateBlog from "../../../components/crud/CreateBlog";
 /**
  * @file Create A Single Blog Page
  * @function Blog
- * @param {*} props
- * @requires <Layout/>
- * @requires <Admin/>
- * @requires <CreateBlog/>
- * @returns {Create A Single Blog Page}
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires CreateBlog
+ * @returns {html}
+ * @summary Renders the html on the Admin Dashboard that
+ * links to the Create Blog Page
  * @author Amen Ra
  */
 const Blog = props => {

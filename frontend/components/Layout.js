@@ -3,9 +3,10 @@ import Header from "./Header";
 /**
  * @file Layout Component
  * @function Layout
- * @param {*} props
- * @param {props} props.children
- * @returns {<Layout />}
+ * @param {object} props
+ * @param {object} props.children
+ * @returns {html}
+ * @summary Renders the Layout compoent
  * @author Amen Ra
  */
 const Layout = ({ children }) => {

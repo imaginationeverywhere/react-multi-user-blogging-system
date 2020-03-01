@@ -12,7 +12,7 @@ import { API } from "../../config";
  * @external Link
  * @requires API
  * @method showBlogCategories*
- * @returns {<Card />}
+ * @returns {html}
  * @summary This is used to display blog data in a blog list or related blogs
  * {@link frontend/pages/blogs/index.js}
  * {@link frontend/pages/categories/[slug].js}
@@ -21,7 +21,8 @@ import { API } from "../../config";
 const Card = ({ blog }) => {
   /**
    * @function showBlogCategories
-   * @param {*} blog
+   * @param {arrau} blog
+   * @returns {html}
    * @summary Shows a list of Blog Categories
    */
   const showBlogCategories = blog =>
@@ -33,7 +34,8 @@ const Card = ({ blog }) => {
 
   /**
    * @function showBlogTags
-   * @param {*} blog
+   * @param {array} blog
+   * @returns {html}
    * @summary Shows a list of Blog tags
    */
   const showBlogTags = blog =>

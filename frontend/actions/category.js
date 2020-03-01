@@ -3,8 +3,10 @@ import { API } from "../config";
 
 /**
  * @function create
- * @param {*} category
- * @param {*} token
+ * @param {string} category
+ * @param {string} token
+ * @returns {JSON}
+ * @summary A POST api call to send data to the backend to create a category
  */
 export const create = (category, token) => {
   return fetch(`${API}/category`, {
@@ -24,7 +26,8 @@ export const create = (category, token) => {
 
 /**
  * @function getCategores
- * @returns GET Api call to categories endpoint
+ * @returns {JSON}
+ * @summary GET Api call to categories endpoint
  */
 export const getCategories = () => {
   return fetch(`${API}/categories`, {
@@ -38,8 +41,9 @@ export const getCategories = () => {
 
 /**
  * @function singleCategory
- * @param {*} slug
- * @returns GET Api call to category endpoint with the slug name
+ * @param {string} slug
+ * @returns {JSON}
+ * @summary  GET Api call to category endpoint with the slug name
  */
 export const singleCategory = slug => {
   return fetch(`${API}/category/${slug}`, {
@@ -53,8 +57,10 @@ export const singleCategory = slug => {
 
 /**
  * @function removeCategory
- * @param {*} slug
- * @param {*} token
+ * @param {string} slug
+ * @param {string} token
+ * @returns {JSON}
+ * @summary A DELETE api call to the backend to delete a category
  */
 export const removeCategory = (slug, token) => {
   return fetch(`${API}/category/${slug}`, {

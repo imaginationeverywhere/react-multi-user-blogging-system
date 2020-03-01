@@ -9,7 +9,8 @@ import UpdateBlog from "../../../components/crud/updateBlog";
  * @requires <Layout/>
  * @requires <Admin/>
  * @requires <UpdateBlog/>
- * @returns {Update Single Blog Page}
+ * @returns {htmls}
+ * @summary Renders the single blog page
  * @author Amen Ra
  */
 const Blog = props => {

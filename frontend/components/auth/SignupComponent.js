@@ -18,16 +18,14 @@ import { signup, isAuth } from "../../actions/auth";
  * @method showMessage
  * @summary This encapsulates all the functionality and markup to create
  * an account for this application.
- *  @returns {SignupComponent} Renders a React Sign Up Component html and css code
+ *  @returns {html}
  * @author Amen Ra
  */
 const SignupComponent = () => {
   /**
-   * @constant {Array}
-   * @type {object <values>}
-   * @type {function <setValues>}
-   * @method useState
-   * {@link https://reactjs.org/docs/hooks-state.html React}
+   * @constant {function} useState @returns {void}
+   * @type {object} @var values
+   * @type {function} @function setValues @returns {void}
    */
   const [values, setValues] = useState({
     name: "Amen Ra",
@@ -40,24 +38,29 @@ const SignupComponent = () => {
   });
 
   /**
-   * @constant {values}
-   * @type {string <name>}
-   * @type {string <email>}
-   * @type {string <password>}
-   * @type {string <error>}
-   * @type {boolean <loading>}
-   * @type {string <message>}
-   * @type {function <showForm>}
+   * @constant {object} @var values
+   * @type {string} @var string
+   * @type {string} @var email
+   * @type {string} @var password
+   * @type {string} @var error
+   * @type {boolean} @var loading
+   * @type {string} @var message
+   * @type {function} @function showForm @return {html}
    */
   const { name, email, password, error, loading, message, showForm } = values;
 
   /**
-   * @method useEffect
-   * @method isAuth
-   * @method Router.push
-   * @summary redirect user to home page is they try to go to
-   * the "/signup" route and they are already signed in
-   * {@link https://reactjs.org/docs/hooks-effect.html React}
+   * @external useEffect
+   * @fires isAuth
+   * @fires Router.push
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the component is mounted and redirects the user to home page
+   * if they try to go to "/signup" route and they are already signed in
    */
   useEffect(() => {
     isAuth() && Router.push("/");

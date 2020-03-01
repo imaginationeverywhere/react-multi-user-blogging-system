@@ -5,13 +5,12 @@ import Link from "next/link";
 /**
  * @file Admin Dashboard Page
  * @function AdminIndex
- * @param {*} props
- * @requires <Layout/>
- * @requires <Admin/>
- * @requires <Link/>
- * @returns {Admin Dashboard page}
- * @summary From this page you will be as an admin user to create,
- * update, or delete a blog, tag, or category.
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires Link
+ * @returns {html}
+ * @summary Renders the Admin Dashboard Page.
  * @author Amen Ra
  */
 const AdminIndex = props => {

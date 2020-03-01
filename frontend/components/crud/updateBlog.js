@@ -40,6 +40,24 @@ const UpdateBlog = ({ router }) => {
   const { error, success, formData, title } = values;
   const token = getCookie("token");
 
+  /**
+   * @external useEffect
+   * @fires setValues
+   * @fires initBlog
+   * @fires initCategories
+   * @fires initTags
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the compoennt is mounted and loads
+   * the existing blog content which is the FormData
+   * the actual blog
+   * list of categories associated with this blog
+   * list tags associated with this log
+   */
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });
     initBlog();

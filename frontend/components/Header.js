@@ -24,7 +24,8 @@ Router.onRouteChangeError = url => NProgress.done();
  * @file Header Component
  * @function Header
  * @param {*} props
- * @returns {<Header />}
+ * @returns {html}
+ * @summary Renders the header compoent
  * @author Amen Ra
  * @
  */

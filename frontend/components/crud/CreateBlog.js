@@ -78,6 +78,12 @@ const CreateBlog = ({ router }) => {
     initTags();
   }, [router]);
 
+  /**
+   * @function initCategories
+   * @returns {void}
+   * @summary Api GET request to retrieve categories that are already in the
+   * database from the backend
+   */
   const initCategories = () => {
     getCategories().then(data => {
       if (data.error) {
@@ -88,6 +94,12 @@ const CreateBlog = ({ router }) => {
     });
   };
 
+  /**
+   * @function initTags
+   * @returns {void}
+   * @summary Api GET request to retrieve tags that are already in the
+   * database from the backend
+   */
   const initTags = () => {
     getTags().then(data => {
       if (data.error) {
@@ -98,6 +110,12 @@ const CreateBlog = ({ router }) => {
     });
   };
 
+  /**
+   * @function publishBlog
+   * @param {event} e
+   * @returns {void}
+   * @summary createBlogForm onSubmit method that POSTS data back to the backend to create a blog
+   */
   const publishBlog = e => {
     e.preventDefault();
     // console.log("ready to publish blog");
@@ -118,6 +136,14 @@ const CreateBlog = ({ router }) => {
     });
   };
 
+  /**
+   * @function handleChange
+   * @param {function} e event
+   * @param {Array} name
+   * @method setValues React Hook
+   * @summary Getting values as they are entered into inputs on the Create Blog page
+   * @return {void}
+   */
   const handleChange = name => e => {
     // console.log(e.target.value);
     const value = name === "photo" ? e.target.files[0] : e.target.value;
@@ -125,6 +151,11 @@ const CreateBlog = ({ router }) => {
     setValues({ ...values, [name]: value, formData, error: "" });
   };
 
+  /**
+   * @function handleBody
+   * @param {event} e
+   * @returns {void}
+   */
   const handleBody = e => {
     // console.log(e);
     setBody(e);
@@ -134,6 +165,12 @@ const CreateBlog = ({ router }) => {
     }
   };
 
+  /**
+   * @function handleToggleCategory
+   * @param {event} c
+   * @returns {void}
+   * @summary Records if a category is checked or unchecked in the database
+   */
   const handleToggleCategory = c => () => {
     setValues({ ...values, error: "" });
     const all = [...checkedCategory];
@@ -145,11 +182,17 @@ const CreateBlog = ({ router }) => {
       all.splice(clickedCategory, 1);
     }
 
-    console.log(all);
+    // console.log(all);
     setCheckedCategory(all);
     formData.set("categories", all);
   };
 
+  /**
+   * @function handleToggleTag
+   * @param {event} t
+   * @returns {void}
+   * @summary Records if a tag is checked or unchecked in the database
+   */
   const handleToggleTag = t => () => {
     setValues({ ...values, error: "" });
     const all = [...checkedTag];
@@ -161,11 +204,16 @@ const CreateBlog = ({ router }) => {
       all.splice(clickedTag, 1);
     }
 
-    console.log(all);
+    // console.log(all);
     setCheckedTag(all);
     formData.set("tags", all);
   };
 
+  /**
+   * @function showCategories
+   * @returns {Array} of checkboxes and labels
+   * @summary Displays a checkbox for every category that exists in the database
+   */
   const showCategories = () => {
     return (
       categories &&
@@ -182,6 +230,11 @@ const CreateBlog = ({ router }) => {
     );
   };
 
+  /**
+   * @function showTags
+   * @returns {Array} of checkboxes and labels
+   * @summary Displays a checkbox for every category that exists in the database
+   */
   const showTags = () => {
     return (
       tags &&
@@ -198,6 +251,11 @@ const CreateBlog = ({ router }) => {
     );
   };
 
+  /**
+   * @function showError
+   * @returns {String} Error Message
+   * @summary Shows an error message when a blog is not successfully created
+   */
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -207,6 +265,11 @@ const CreateBlog = ({ router }) => {
     </div>
   );
 
+  /**
+   * @function showSuccess
+   * @returns {String} Success Message
+   * @summary Shows an success message when a blog is successfully created
+   */
   const showSuccess = () => (
     <div
       className="alert alert-success"
@@ -216,6 +279,12 @@ const CreateBlog = ({ router }) => {
     </div>
   );
 
+  /**
+   * @function createBlogForm
+   * @returns {*} Title Input and Quill Editor
+   * @summary This return the Input to Enter a Blog Title and the Quill Editor
+   * to put content in the blog
+   */
   const createBlogForm = () => {
     return (
       <form onSubmit={publishBlog}>

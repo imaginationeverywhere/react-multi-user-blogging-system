@@ -2,7 +2,18 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { listSearch } from "../../actions/blog";
 
-const Search = () => {
+/**
+ * @file Search Component
+ * @function Search
+ * @param {*} props
+ * @external Link
+ * @external useState
+ * @external useEffect
+ * @requires listSearch
+ * @returns {html} Search Compoent
+ * @summary Returns the Search Component
+ */
+const Search = props => {
   const [values, setValues] = useState({
     search: undefined,
     results: [],
@@ -15,6 +26,8 @@ const Search = () => {
   /**
    * @function searchSubmit
    * @param {function} e
+   * @returns {void}
+   * @summary The onSubmit event handler for the form
    */
   const searchSubmit = e => {
     e.preventDefault();
@@ -32,7 +45,7 @@ const Search = () => {
    * @function handleChange
    * @param {function} e event
    * @method setValues React Hook
-   * @summary Getting values as they are entered into inputs on the page
+   * @summary Getting values as they are entered into Search Input
    * @return {void}
    */
   const handleChange = e => {
@@ -44,6 +57,12 @@ const Search = () => {
     });
   };
 
+  /**
+   * @function searchedBlogs
+   * @param {Array} results
+   * @returns {html} Array of blogs
+   * @summary Displays a list of blogs from a search query
+   */
   const searchedBlogs = (results = []) => {
     return (
       <div className="jumbotron bg-white">
@@ -64,7 +83,9 @@ const Search = () => {
 
   /**
    * @function searchForm
-   * @returns {*}
+   * @returns {html}
+   * @summary Renders a form with a searchbox and button
+   * to perform search of blog posts
    */
   const searchForm = () => (
     <form onSubmit={searchSubmit}>

@@ -6,6 +6,7 @@ import queryString from "query-string";
  * @function createBlog
  * @param {*} blog
  * @param {string} token
+ * @returns {void}
  * @summary POST Api Call to send data to the backend
  * to create a blog
  */
@@ -28,6 +29,7 @@ export const createBlog = (blog, token) => {
  * @function listBlogsWIthCategoriesAndTags
  * @param {number} skip
  * @param {number} limit
+ * @returns {void}
  * @summary POST Api Call to the backend to get all categories and tags
  */
 export const listBlogsWithCategoriesAndTags = (skip, limit) => {
@@ -52,6 +54,7 @@ export const listBlogsWithCategoriesAndTags = (skip, limit) => {
 /**
  * @function SingleBlog
  * @param {string} slug
+ * @returns {void}
  * @summary GET Api Call to the backend to get a single blog based on slug name
  */
 export const singleBlog = slug => {
@@ -67,6 +70,7 @@ export const singleBlog = slug => {
 /**
  * @function listRelated
  * @param {string} blog
+ * @returns {void}
  * @summary GET Api Call to the backend to get all blog
  */
 export const listRelated = blog => {
@@ -86,6 +90,7 @@ export const listRelated = blog => {
 
 /**
  * @function list
+ * @returns {void}
  * @summary GET Api Call to get all blogs
  */
 export const list = () => {
@@ -101,6 +106,7 @@ export const list = () => {
 /**
  * @function listSearch
  * @param params
+ * @returns {void}
  * @summary GET Api call to the backend where parameters are sent to get blogs return
  * given what parameters are provided in the query which can be about the title or
  * anything in the body
@@ -126,6 +132,7 @@ export const listSearch = params => {
  * @function removeBlog
  * @param {string} slug
  * @param {string} token
+ * @returns {void}
  * @summary DELETE Api Call to the backend to delete an individual blog
  */
 export const removeBlog = (slug, token) => {
@@ -148,6 +155,7 @@ export const removeBlog = (slug, token) => {
  * @param {*} blog
  * @param {string} token
  * @param {string} slug
+ * @returns {void}
  * @summary PUT Api Call to send data the backend to update a single blog
  */
 export const updateBlog = (blog, token, slug) => {
