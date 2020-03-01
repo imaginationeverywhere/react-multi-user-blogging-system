@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import { APP_NAME } from "../config";
 import { signout, isAuth } from "../actions/auth";
+import Search from "./blog/search";
 import "../node_modules/nprogress/nprogress.css";
 import "../static/css/styles.css";
 
@@ -33,7 +34,7 @@ const Header = props => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar color="light" light expand="md">
         <Link href="/">
           {/* NavLink is an a tag from Reactstrap */}
@@ -91,7 +92,8 @@ const Header = props => {
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+      <Search />
+    </React.Fragment>
   );
 };
 

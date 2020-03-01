@@ -352,6 +352,7 @@ const listRelated = (req, res) => {
  * @param {*} res
  */
 const listSearch = (req, res) => {
+  console.log(req.query);
   const { search } = req.query;
   if (search) {
     Blog.find(
@@ -369,6 +370,7 @@ const listSearch = (req, res) => {
         }
         res.json(blogs);
       }
+      // exclude the photo and all the body content from the search results
     ).select("-photo -body");
   }
 };

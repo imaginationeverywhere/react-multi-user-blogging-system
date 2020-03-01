@@ -93,8 +93,8 @@ const SigninComponent = () => {
 
   /**
    * @function handleChange
-   * @param {*} name
-   * @param {*} e event
+   * @param {array} name
+   * @param {function} e event
    * @method setValues React Hook
    * @summary Getting values as they are entered into inputs on the page
    * @return {void}
