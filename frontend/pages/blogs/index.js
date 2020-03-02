@@ -41,6 +41,11 @@ const Blogs = ({
   blogsSkipped,
   router
 }) => {
+  /**
+   * @function head
+   * @returns {hmtl}
+   * @summary A an html head tag
+   */
   const head = () => (
     <Head>
       <title>Programming blogs | {APP_NAME}</title>
@@ -74,13 +79,52 @@ const Blogs = ({
     </Head>
   );
 
+  /**
+   * @constant {function} useState @returns {void}
+   * @param blogsLimit
+   * @type {number} @var limit
+   * @type {function} @function setLimit @returns {void}
+   */
   const [limit, setLimit] = useState(blogsLimit);
+
+  /**
+   * @constant {function} useState @returns {void}
+   * @param {number}
+   * @type {number} @var skip
+   * @type {function} @function setSkip @returns {void}
+   */
   const [skip, setSkip] = useState(0);
+
+  /**
+   * @constant {function} useState @returns {void}
+   * @param {number} @var totalBlogs
+   * @type {number} @var size
+   * @type {function} @function setSize @returns {void}
+   */
   const [size, setSize] = useState(totalBlogs);
+
+  /**
+   * @constant {function} useState @returns {void}
+   * @param {array}
+   * @type {array} @var loadedBlogs
+   * @type {function} @function setloadedBlogs @returns {void}
+   */
   const [loadedBlogs, setloadedBlogs] = useState([]);
 
+  /**
+   * @function loadMore
+   * @fires listBlogsWithCategoriesAndTags
+   * @returns {void}
+   */
   const loadMore = () => {
     let toSkip = skip + limit;
+    /**
+     * @function listBlogsWithCategoriesAndTags
+     * @fires setloadedBlogs
+     * @fires setSize
+     * @fires setSkip
+     * @returns {void}
+     */
     listBlogsWithCategoriesAndTags(toSkip, limit).then(data => {
       if (data.error) {
         console.log(data.error);
@@ -92,6 +136,12 @@ const Blogs = ({
     });
   };
 
+  /**
+   * @function loadMoreButton
+   * @event onClick @fires loadMore
+   * @returns {html}
+   * @summary Renders the Load More button which fires the loadMore event
+   */
   const loadMoreButton = () => {
     return (
       size > 0 &&
@@ -103,6 +153,12 @@ const Blogs = ({
     );
   };
 
+  /**
+   * @function showAllBlogs
+   * @returns {html}
+   * @summary Show the initial number of blogs based on the @param limit
+   * in @function listBlogsWithCategoriesAndTags
+   */
   const showAllBlogs = () => {
     return blogs.map((blog, i) => {
       return (
@@ -114,6 +170,11 @@ const Blogs = ({
     });
   };
 
+  /**
+   * @function showAllCategories
+   * @returns {html}
+   * @summary Renders a list of all categories as button Links
+   */
   const showAllCategories = () => {
     return categories.map((c, i) => (
       <Link href={`/categories/${c.slug}`} key={i}>
@@ -122,6 +183,11 @@ const Blogs = ({
     ));
   };
 
+  /**
+   * @function showAllTags
+   * @returns {html}
+   * @summary Renders a list of all tags as button Links
+   */
   const showAllTags = () => {
     return tags.map((t, i) => (
       <Link href={`/tags/${t.slug}`} key={i}>
@@ -130,6 +196,12 @@ const Blogs = ({
     ));
   };
 
+  /**
+   * @function showLoadedBlogs
+   * @returns {html}
+   * @summary Loads more blogs based on the @param limit
+   * in @function listBlogsWithCategoriesAndTags
+   */
   const showLoadedBlogs = () => {
     return loadedBlogs.map((blog, i) => (
       <article key={i}>
@@ -152,11 +224,8 @@ const Blogs = ({
               </div>
             </header>
           </div>
-          {/* Show the initial number of 2 blogs with the showAllBlog function */}
           <div className="container-fluid">{showAllBlogs()}</div>
-          {/* Load two more blogs with the showLoadedBlogs function */}
           <div className="container-fluid">{showLoadedBlogs()}</div>
-          {/* Fires the event to load more blogs */}
           <div className="text-center pt-5 pb-5">{loadMoreButton()}</div>
           <section>
             <div className="pb-5 text-center">
@@ -174,10 +243,22 @@ const Blogs = ({
   );
 };
 
+/**
+ * @function Blogs
+ * @property {getInitialProps}
+ * @fires listBlogsWithCategoriesAndTags
+ * @returns {function}
+ */
 Blogs.getInitialProps = () => {
   let skip = 0;
   let limit = 10;
 
+  /**
+   * @function listBlogsWithCategoriesAndTags
+   * @param skip
+   * @param limit
+   * @return {object}
+   */
   return listBlogsWithCategoriesAndTags(skip, limit).then(data => {
     if (data.error) {
       console.log(data.error);

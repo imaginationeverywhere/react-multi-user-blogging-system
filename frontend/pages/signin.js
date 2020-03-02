@@ -4,10 +4,10 @@ import SigninComponent from "../components/auth/SigninComponent";
 /**
  * @file Sign In Page
  * @function Signin
- * @param {*} props
- * @requires <Layout/>
- * @requires <SigninComponent/>
- * @returns {Sign In Page}
+ * @param {object} props
+ * @requires Layout
+ * @requires SigninComponent
+ * @returns {html}
  * @summary This is the page where a user goes to sign into their account
  * @author Amen Ra
  */

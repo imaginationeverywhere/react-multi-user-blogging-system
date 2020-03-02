@@ -23,15 +23,25 @@ Router.onRouteChangeError = url => NProgress.done();
 /**
  * @file Header Component
  * @function Header
- * @param {*} props
+ * @param {object} props
  * @returns {html}
  * @summary Renders the header compoent
  * @author Amen Ra
  * @
  */
 const Header = props => {
+  /**
+   * @constant {function} useState
+   * @type {boolean} @var isOpen
+   * @type {function} @var setOpen @param {boolean} isOpen
+   */
   const [isOpen, setIsOpen] = useState(false);
 
+  /**
+   * @function toggle
+   * @fires setOpen @param {boolean} isOpen
+   * @returns {void}
+   */
   const toggle = () => setIsOpen(!isOpen);
 
   return (

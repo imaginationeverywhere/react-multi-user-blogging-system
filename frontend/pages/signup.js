@@ -4,10 +4,10 @@ import SignupComponent from "../components/auth/SignupComponent";
 /**
  * @file Sign Up Page
  * @function Signup
- * @param {*} props
- * @requires <Layout/>
- * @requires <SignupComponent/>
- * @returns {Sign Up Page}
+ * @param {object} props
+ * @requires Layout
+ * @requires SignupComponent
+ * @returns {html}
  * @summary This is the page where a user goes to create an account
  * @author Amen Ra
  */

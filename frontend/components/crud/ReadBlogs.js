@@ -16,7 +16,7 @@ import { list, removeBlog } from "../../actions/blog";
  * @requires isAuth
  * @requires list
  * @requires removeBlog
- * @returns {<ReadBlogs />}
+ * @returns {html}
  * @summary This is the compoent that is used on the Managed Blogs Page
  * {@link frontend/pages/admin/crud/blogs.js}
  * @author Amen Ra

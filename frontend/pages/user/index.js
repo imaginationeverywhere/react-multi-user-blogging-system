@@ -4,11 +4,11 @@ import Private from "../../components/auth/Private";
 /**
  * @file User Dashboard Page
  * @function UserIndex
- * @param {*} props
- * @requires <Layout/>
- * @requires <Private/>
- * @returns {User Dashboard Page}
- * @summary This page is the Dashboard Page for a user
+ * @param {object} props
+ * @requires Layout
+ * @requires Private
+ * @returns {html}
+ * @summary This page is the User Dashboard Page
  * @author Amen Ra
  */
 const UserIndex = props => {

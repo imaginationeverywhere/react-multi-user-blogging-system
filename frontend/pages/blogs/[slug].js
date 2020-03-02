@@ -9,12 +9,13 @@ import moment from "moment";
 import SmallCard from "../../components/blog/SmallCard";
 
 /**
- * @file React Single Blog Page
+ * @file Single Blog Page
  * @function SingleBlog
- * @param {*} props
- * @param {props} props.blog
- * @param {props} props.query
- * @returns {SingleBlog} Next.js Page
+ * @param {object} props
+ * @param {object} props.blog
+ * @param {object} props.query
+ * @returns {html}
+ * @summary Renders the Single Blog Page
  * @author Amen Ra
  */
 const SingleBlog = ({ blog, query }) => {
@@ -195,8 +196,8 @@ const SingleBlog = ({ blog, query }) => {
 /**
  * @function SingleBlog
  * @property {getInitialProps}
- * @method singleBlog
- * @returns {data, query}
+ * @fires singleBlog
+ * @returns {blog, query}
  */
 SingleBlog.getInitialProps = ({ query }) => {
   return singleBlog(query.slug).then(data => {

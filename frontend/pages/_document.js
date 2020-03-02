@@ -4,7 +4,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
  * @class MyDocument
  * @summary This is Parent Container that all other pages and componets of the applicaiton
  * are placed in
- * @returns {MyDocument}
+ * @returns {html}
  * @author Amen Ra
  */
 class MyDocument extends Document {

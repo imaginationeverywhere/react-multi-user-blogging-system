@@ -11,26 +11,25 @@ import Card from "../../components/blog/Card";
 /**
  * @file Signle Tag Page
  * @function Tag
- * @param {*} props
- * @param {props} props.tag
- * @param {props} props.blogs
+ * @param {object} props
+ * @param {object} props.tag
+ * @param {object} props.blogs
  * @external renderHTML
  * @external moment
- * @external <Head/>
- * @external <Link/>
- * @requires <Layout/>
- * @requires <Card/>
+ * @external Head
+ * @external Link
+ * @requires Layout
+ * @requires Card
  * @requires singleTag
- * @returns {Single Tag Page}
- * @summary This page diplays all the information related to a particular category
- * including blogs associated with it
+ * @returns {html}
+ * @summary Renders the Single Tag Page
  * @author Amen Ra
  */
 const Tag = ({ tag, blogs, query }) => {
   /**
    * @function head
-   * @returns {Head}
-   * @description A <Head> Component with a Blog Title, App Name, Blog Description, Canoncal URL, Facebook App ID
+   * @returns {hmtl}
+   * @summary A an html head tag
    */
   const head = () => (
     <Head>
@@ -86,10 +85,10 @@ const Tag = ({ tag, blogs, query }) => {
 };
 
 /**
- * @function Category
+ * @function Tag
  * @property {getInitialProps}
- * @method singleCategory
- * @returns {data.category, data.blogs, query}
+ * @method singleTag
+ * @returns {tag, blogs, query}
  */
 Tag.getInitialProps = ({ query }) => {
   return singleTag(query.slug).then(data => {

@@ -11,26 +11,25 @@ import Card from "../../components/blog/Card";
 /**
  * @file Signle Category Page
  * @function Category
- * @param {*} props
- * @param {props} props.category
- * @param {props} props.blogs
+ * @param {object} props
+ * @param {object} props.category
+ * @param {object} props.blogs
  * @external renderHTML
  * @external moment
- * @external <Head/>
- * @external <Link/>
- * @requires <Layout/>
- * @requires <Card/>
+ * @external Head
+ * @external Link
+ * @requires Layout
+ * @requires Card
  * @requires SingleCategory
- * @returns {Single Category Page}
- * @summary This page diplays all the information related to a particular category
- * including blogs associated with it
+ * @returns {html}
+ * @summary Renders the Single Category Page
  * @author Amen Ra
  */
 const Category = ({ category, blogs, query }) => {
   /**
    * @function head
-   * @returns {Head}
-   * @description A <Head> Component with a Blog Title, App Name, Blog Description, Canoncal URL, Facebook App ID
+   * @returns {hmtl}
+   * @summary A an html head tag
    */
   const head = () => (
     <Head>
@@ -92,7 +91,7 @@ const Category = ({ category, blogs, query }) => {
  * @function Category
  * @property {getInitialProps}
  * @method singleCategory
- * @returns {data.category, data.blogs, query}
+ * @returns {category, blogs, query}
  */
 Category.getInitialProps = ({ query }) => {
   return singleCategory(query.slug).then(data => {

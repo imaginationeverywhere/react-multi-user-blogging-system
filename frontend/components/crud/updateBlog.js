@@ -16,7 +16,7 @@ import { API } from "../../config";
  * @function UpdateBlog
  * @param {*} props
  * @param {props} props.router
- * @returns {<UpdateBlog />}
+ * @returns {html}
  * @author Amen Ra
  */
 const UpdateBlog = ({ router }) => {
@@ -42,10 +42,10 @@ const UpdateBlog = ({ router }) => {
 
   /**
    * @external useEffect
-   * @fires setValues
-   * @fires initBlog
-   * @fires initCategories
-   * @fires initTags
+   * @fires setValues (@returns {void})
+   * @fires initBlog (@returns {void})
+   * @fires initCategories (@returns {void})
+   * @fires initTags (@returns {void})
    * @returns {void}
    * @description Accepts a function that contains imperative, possibly effectful code.
    * @param effect — Imperative function that can return a cleanup function
@@ -65,6 +65,17 @@ const UpdateBlog = ({ router }) => {
     initTags();
   }, [router]);
 
+  /**
+   * @function initBlog
+   * @fires singleBlog (
+   *  @param {string} router.query.slug
+   *  @fires setValues (@param {object} @returns {void})
+   *  @fires setBody (@param {object} @returns {void})
+   *  @fires setCategoriesArray (@param {object} @returns {void})
+   *  @fires setTagsArray (@param {object} @returns {void})
+   * )
+   * @returns {void}
+   */
   const initBlog = () => {
     if (router.query.slug) {
       singleBlog(router.query.slug).then(data => {
@@ -80,6 +91,11 @@ const UpdateBlog = ({ router }) => {
     }
   };
 
+  /**
+   * @function setCategoriesArray
+   * @param {array} blogCategories
+   * @fires setCheckedCategory (@param {array} @returns {void})
+   */
   const setCategoriesArray = blogCategories => {
     let ca = [];
     blogCategories.map((c, i) => {
@@ -88,6 +104,11 @@ const UpdateBlog = ({ router }) => {
     setCheckedCategory(ca);
   };
 
+  /**
+   * @function setCategoriesArray
+   * @param {array} blogTags
+   * @fires setCheckedTag (@param {array} @returns {void})
+   */
   const setTagsArray = blogTags => {
     let ta = [];
     blogTags.map((t, i) => {
@@ -96,6 +117,14 @@ const UpdateBlog = ({ router }) => {
     setCheckedTag(ta);
   };
 
+  /**
+   * @function initCategories
+   * @fires getCategories (
+   *  @fires setValues (@param {object} @returns {void})
+   *  @fires setCategories (@param {object} @returns {void})
+   * )
+   * @returns {void}
+   */
   const initCategories = () => {
     getCategories().then(data => {
       if (data.error) {
@@ -106,6 +135,14 @@ const UpdateBlog = ({ router }) => {
     });
   };
 
+  /**
+   * @function initTags
+   * @fires getTags (
+   *  @fires setValues (@param {object} @returns {void})
+   *  @fires setTags (@param {object} @returns {void})
+   * )
+   * @returns {void}
+   */
   const initTags = () => {
     getTags().then(data => {
       if (data.error) {
@@ -116,6 +153,14 @@ const UpdateBlog = ({ router }) => {
     });
   };
 
+  /**
+   * @function handleToggleCategory
+   * @param {event} c
+   * @fires setValues (@param {object} @returns {void})
+   * @fires setCheckedCategory (@param {object} @returns {void})
+   * @returns {void}
+   * @summary Records if a category is checked or unchecked in the database
+   */
   const handleToggleCategory = c => () => {
     setValues({ ...values, error: "" });
     const all = [...checkedCategory];
@@ -132,6 +177,14 @@ const UpdateBlog = ({ router }) => {
     formData.set("categories", all);
   };
 
+  /**
+   * @function handleToggleTag
+   * @param {event} t
+   * @fires setValues (@param {object} @returns {void})
+   * @fires setCheckedTag (@param {object} @returns {void})
+   * @returns {void}
+   * @summary Records if a tag is checked or unchecked in the database
+   */
   const handleToggleTag = t => () => {
     setValues({ ...values, error: "" });
     const all = [...checkedTag];
@@ -148,6 +201,11 @@ const UpdateBlog = ({ router }) => {
     formData.set("tags", all);
   };
 
+  /**
+   * @function findCheckCategory
+   * @param {number} c
+   * @returns {boolean}
+   */
   const findCheckCategory = c => {
     const result = checkedCategory.indexOf(c);
     if (result !== -1) {
@@ -157,6 +215,11 @@ const UpdateBlog = ({ router }) => {
     }
   };
 
+  /**
+   * @function findCheckTag
+   * @param {number} c
+   * @returns {boolean}
+   */
   const findCheckTag = t => {
     const result = checkedTag.indexOf(t);
     if (result !== -1) {
@@ -166,6 +229,12 @@ const UpdateBlog = ({ router }) => {
     }
   };
 
+  /**
+   * @function showCategories
+   * @event onChange (@fires handleToggleCategory)
+   * @returns {html}
+   * @summary Displays a checkbox for every category that exists in the database
+   */
   const showCategories = () => {
     return (
       categories &&
@@ -183,6 +252,12 @@ const UpdateBlog = ({ router }) => {
     );
   };
 
+  /**
+   * @function showTags
+   * @event onChange (@fires handleToggleTag)
+   * @returns {html}
+   * @summary Displays a checkbox for every category that exists in the database
+   */
   const showTags = () => {
     return (
       tags &&
@@ -200,6 +275,15 @@ const UpdateBlog = ({ router }) => {
     );
   };
 
+  /**
+   * @function handleChange
+   * @param {function} e
+   * @param {Array} name
+   * @fires setValues (@param {object} @returns {void})
+   * @fires set (@param {array} @param {string} @returns {void})
+   * @summary Getting values as they are entered into inputs on the Create Blog page
+   * @return {void}
+   */
   const handleChange = name => e => {
     // console.log(e.target.value);
     const value = name === "photo" ? e.target.files[0] : e.target.value;
@@ -207,13 +291,38 @@ const UpdateBlog = ({ router }) => {
     setValues({ ...values, [name]: value, formData, error: "" });
   };
 
+  /**
+   * @function handleBody
+   * @param {event} e
+   * @fires setBody (@param {event} @returns {void})
+   * @returns {void}
+   */
   const handleBody = e => {
     setBody(e);
     formData.set("body", e);
   };
 
+  /**
+   * @function editBlog
+   * @param {event} e
+   * @fires preventDefault (@returns {void})
+   * @fires updateBlog (@returns {void})
+   * @returns {void}
+   * @summary createBlogForm onSubmit method that POSTS data back to the backend to create a blog
+   */
   const editBlog = e => {
     e.preventDefault();
+    /**
+     * @function updateBlog
+     * @param {string} formData
+     * @param {string} token
+     * @param {string} router.query.slug
+     * @fires setValues (@param {object} @returns {void})
+     * @fires isAuth (@param {boolean} @returns {number})
+     * @fires Router.replace (@param {string} @returns {string})
+     * @fires setTags
+     * @returns {void}
+     */
     updateBlog(formData, token, router.query.slug).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
@@ -234,6 +343,11 @@ const UpdateBlog = ({ router }) => {
     });
   };
 
+  /**
+   * @function showError
+   * @returns {html}
+   * @summary Shows an error message when a blog is not successfully updated
+   */
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -243,6 +357,11 @@ const UpdateBlog = ({ router }) => {
     </div>
   );
 
+  /**
+   * @function showSuccess
+   * @returns {html}
+   * @summary Shows an success message when a blog is successfully updated
+   */
   const showSuccess = () => (
     <div
       className="alert alert-success"
@@ -252,6 +371,13 @@ const UpdateBlog = ({ router }) => {
     </div>
   );
 
+  /**
+   * @function updateBlogForm
+   * @returns {html}
+   * @event onChange (@fires handleChange) (@fires handleBody)
+   * @summary This return the Input to Enter a Blog Title and the Quill Editor
+   * to update content in the blog
+   */
   const updateBlogForm = () => {
     return (
       <form onSubmit={editBlog}>

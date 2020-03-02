@@ -5,10 +5,10 @@ import UpdateBlog from "../../../components/crud/updateBlog";
 /**
  * @file Update Single Blog Page
  * @function Blog
- * @param {*} props
- * @requires <Layout/>
- * @requires <Admin/>
- * @requires <UpdateBlog/>
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires UpdateBlog
  * @returns {htmls}
  * @summary Renders the single blog page
  * @author Amen Ra

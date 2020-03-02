@@ -3,9 +3,9 @@ import Layout from "../components/Layout";
 /**
  * @file Site Home Page
  * @function Index
- * @param {*} props
- * @requires <Layout/>
- * @returns {Site Home Page}
+ * @param {object} props
+ * @requires Layout
+ * @returns {html}
  * @summary This is the default page of the website
  * @author Amen Ra
  */
