@@ -12,8 +12,8 @@ import "../../node_modules/react-quill/dist/quill.snow.css";
 /**
  * @file Create Blog Component
  * @function CreateBlog
- * @param {*} props
- * @param {props} props.router
+ * @param {object} props
+ * @param {object} props.router
  * @external useState
  * @external useEffect
  * @external dynamic
@@ -25,7 +25,7 @@ import "../../node_modules/react-quill/dist/quill.snow.css";
  * @requires createBlog
  * @requires QuillModules
  * @requires QuillFormates
- * @returns {<CreateBlog />}
+ * @returns {html}
  * @summary This component is used on the Create Blog Page
  * {@link frontend/pages/admin/crud/blog.js}
  * @author Amen Ra

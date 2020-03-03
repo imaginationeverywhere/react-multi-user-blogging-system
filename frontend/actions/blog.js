@@ -155,7 +155,7 @@ export const removeBlog = (slug, token) => {
  * @param {object} blog
  * @param {string} token
  * @param {string} slug
- * @returns {void}
+ * @returns {JSON}
  * @summary PUT Api Call to send data the backend to update a single blog
  */
 export const updateBlog = (blog, token, slug) => {

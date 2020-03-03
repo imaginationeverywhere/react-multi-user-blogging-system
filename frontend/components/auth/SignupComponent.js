@@ -68,7 +68,7 @@ const SignupComponent = () => {
 
   /**
    * @function handleSubmit
-   * @param {*} e
+   * @param {event} e
    * @method preventDefault
    * @method setValues React useState Hook
    * @method signup action
