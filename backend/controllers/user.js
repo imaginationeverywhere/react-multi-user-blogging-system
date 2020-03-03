@@ -1,12 +1,15 @@
+const fs = require("fs");
+const _ = require("lodash");
+const formidable = require("formidable");
 const User = require("../models/user");
 const Blog = require("../models/blog");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
 /**
  * @function read
- * @param  {object} req
- * @param  {object} res
- * @returns {JSON}
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const read = (req, res) => {
   req.profile.hashed_password = undefined;
@@ -15,9 +18,9 @@ const read = (req, res) => {
 
 /**
  * @function publicProfile
- * @param  {object} req
- * @param  {object} res
- * @returns {JSON}
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const publicProfile = (req, res) => {
   let username = req.params.username;
@@ -56,7 +59,66 @@ const publicProfile = (req, res) => {
   });
 };
 
+/**
+ * @function update
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const update = (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Photo could not be uploaded"
+      });
+    }
+    let user = req.profile;
+    user = _.extend(user, fields);
+
+    if (files.photo) {
+      if (files.photo.size > 1000000) {
+      }
+      user.photo.data = fs.readFileSync(files.photo.path);
+      user.photo.contentType = files.photo.type;
+
+      user.save((err, result) => {
+        if (err) {
+          return res.status(400).json({
+            error: errorHandler(err)
+          });
+        }
+        user.hashed_password = undefined;
+        res.json(user);
+      });
+    }
+  });
+};
+
+/**
+ * @function photo
+ * @param {object} req
+ * @param {object} res
+ * @returns {File}
+ */
+const photo = (req, res) => {
+  const username = req.params.username;
+  User.findOne({ username }).exec((err, user) => {
+    if (err || !user) {
+      return res.status(400).json({
+        error: "User not found"
+      });
+    }
+    if (user.photo.data) {
+      res.set("Content-Type", user.photo.contentType);
+      return res.send(user.photo.data);
+    }
+  });
+};
+
 module.exports = {
   read,
-  publicProfile
+  publicProfile,
+  update,
+  photo
 };

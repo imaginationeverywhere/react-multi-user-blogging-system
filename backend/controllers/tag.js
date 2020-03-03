@@ -5,8 +5,9 @@ const { errorHandler } = require("../helpers/dbErrorHandler");
 
 /**
  * @function create
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const create = (req, res) => {
   const { name } = req.body;
@@ -27,8 +28,9 @@ const create = (req, res) => {
 
 /**
  * @function list
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const list = (req, res) => {
   Tag.find({}).exec((err, data) => {
@@ -43,8 +45,9 @@ const list = (req, res) => {
 
 /**
  * @function read
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const read = (req, res) => {
   const slug = req.params.slug.toLowerCase();
@@ -76,8 +79,9 @@ const read = (req, res) => {
 
 /**
  * @function remove
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const remove = (req, res) => {
   const slug = req.params.slug.toLowerCase();

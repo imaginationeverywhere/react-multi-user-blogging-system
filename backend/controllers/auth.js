@@ -5,8 +5,9 @@ const expressJwt = require("express-jwt");
 
 /**
  * @function signup
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec((err, user) => {
@@ -39,8 +40,9 @@ const signup = (req, res) => {
 
 /**
  * @function signin
- * @param {req}
- * @param {res}
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
  */
 const signin = (req, res) => {
   const { email, password } = req.body;
@@ -74,8 +76,8 @@ const signin = (req, res) => {
 
 /**
  * @function signout
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
  * @returns {void}
  */
 const singout = (req, res) => {
@@ -94,9 +96,10 @@ const requireSignin = expressJwt({
 
 /**
  * @function authMiddleware
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ * @param {function} next
  */
 const authMiddleware = (req, res, next) => {
   const authUserId = req.user._id;
@@ -113,9 +116,10 @@ const authMiddleware = (req, res, next) => {
 
 /**
  * @function adminMiddleware
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ * @param {function} next
  */
 const adminMiddleware = (req, res, next) => {
   const adminUserId = req.user._id;
