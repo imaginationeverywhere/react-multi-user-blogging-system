@@ -1,18 +1,18 @@
 import Layout from "../../../components/Layout";
 import Admin from "../../../components/auth/Admin";
-import CreateBlog from "../../../components/crud/CreateBlog";
+import ReadBlogs from "../../../components/crud/ReadBlogs";
 
-const Blog = () => {
+const Blogs = () => {
   return (
     <Layout>
       <Admin>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className="col-md-12 pt-5 pb-5">
-              <h2>Create a new blog</h2>
+              <h2>Manage blogs</h2>
             </div>
-            <div className="col-md-12 pt-5 pb-5">
-              <CreateBlog />
+            <div className="col-md-12 pb-5">
+              <ReadBlogs />
             </div>
           </div>
         </div>
@@ -21,4 +21,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Blogs;
