@@ -8,8 +8,7 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
-  NavbarBrand
+  NavLink
 } from "reactstrap";
 import { APP_NAME } from "../config";
 import { signout, isAuth } from "../actions/auth";
@@ -20,6 +19,14 @@ Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
 Router.onRouteChangeError = url => NProgress.done();
 
+/**
+ * @file Header Component
+ * @function Header
+ * @param {*} props
+ * @returns {<Header />}
+ * @author Amen Ra
+ * @
+ */
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
 

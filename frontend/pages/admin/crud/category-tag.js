@@ -2,9 +2,19 @@ import Layout from "../../../components/Layout";
 import Admin from "../../../components/auth/Admin";
 import Category from "../../../components/crud/Category";
 import Tag from "../../../components/crud/Tag";
-import Link from "next/link";
 
-const CategoryTag = () => {
+/**
+ * @file Manage Categories and Tags
+ * @function CategoryTag
+ * @param {*} props
+ * @requires <Layout/>
+ * @requires <Admin/>
+ * @requires <Category/>
+ * @requires <Tag/>
+ * @returns {Page to manage categories and tags}
+ * @author Amen Ra
+ */
+const CategoryTag = props => {
   return (
     <Layout>
       <Admin>

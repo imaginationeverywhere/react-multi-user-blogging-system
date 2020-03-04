@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Router from "next/router";
-import { isAuth, getCookie } from "../../actions/auth";
+import { getCookie } from "../../actions/auth";
 import { create, getCategories, removeCategory } from "../../actions/category";
 
-const Category = () => {
+/**
+ * @file Category Compoent
+ * @function Category
+ * @external useEffect
+ * @external useState
+ * @param {*} props
+ * @requires getCookie
+ * @requires create
+ * @requires getCategories
+ * @requires removeCategory
+ * @returns {<Category />}
+ * @summary This component is used on the Manage Categories and Tags Page
+ * {@link frontend/pages/admin/crud/category-tag.js}
+ * @returns {<Category />}
+ * @author Amen Ra
+ */
+const Category = props => {
   const [values, setValues] = useState({
     name: "",
     error: false,
@@ -38,7 +52,7 @@ const Category = () => {
           onDoubleClick={() => deleteConfirm(c.slug)}
           title="Double click to delete"
           key={i}
-          className="btn btn-outline-primary mr-1 ml-1 mt-3"
+          className="btn btn-primary mr-1 ml-1 mt-3"
         >
           {c.name}
         </button>
@@ -137,7 +151,7 @@ const Category = () => {
         />
       </div>
       <div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-outline-primary">
           Create Category
         </button>
       </div>

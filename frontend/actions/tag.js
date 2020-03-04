@@ -1,6 +1,11 @@
 import fetch from "isomorphic-fetch";
 import { API } from "../config";
 
+/**
+ * @function create
+ * @param {*} tag
+ * @param {*} token
+ */
 export const create = (tag, token) => {
   return fetch(`${API}/tag`, {
     method: "POST",
@@ -17,6 +22,9 @@ export const create = (tag, token) => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function getTags
+ */
 export const getTags = () => {
   return fetch(`${API}/tags`, {
     method: "GET"
@@ -27,6 +35,10 @@ export const getTags = () => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function singleTag
+ * @param {*} slug
+ */
 export const singleTag = slug => {
   return fetch(`${API}/tag/${slug}`, {
     method: "GET"
@@ -37,6 +49,11 @@ export const singleTag = slug => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function removeTag
+ * @param {*} slug
+ * @param {*} token
+ */
 export const removeTag = (slug, token) => {
   return fetch(`${API}/tag/${slug}`, {
     method: "DELETE",

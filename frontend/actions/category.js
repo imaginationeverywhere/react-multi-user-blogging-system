@@ -1,6 +1,11 @@
 import fetch from "isomorphic-fetch";
 import { API } from "../config";
 
+/**
+ * @function create
+ * @param {*} category
+ * @param {*} token
+ */
 export const create = (category, token) => {
   return fetch(`${API}/category`, {
     method: "POST",
@@ -17,6 +22,10 @@ export const create = (category, token) => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function getCategores
+ * @returns GET Api call to categories endpoint
+ */
 export const getCategories = () => {
   return fetch(`${API}/categories`, {
     method: "GET"
@@ -27,6 +36,11 @@ export const getCategories = () => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function singleCategory
+ * @param {*} slug
+ * @returns GET Api call to category endpoint with the slug name
+ */
 export const singleCategory = slug => {
   return fetch(`${API}/category/${slug}`, {
     method: "GET"
@@ -37,6 +51,11 @@ export const singleCategory = slug => {
     .catch(err => console.log(err));
 };
 
+/**
+ * @function removeCategory
+ * @param {*} slug
+ * @param {*} token
+ */
 export const removeCategory = (slug, token) => {
   return fetch(`${API}/category/${slug}`, {
     method: "DELETE",
