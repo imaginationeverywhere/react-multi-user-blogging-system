@@ -1,8 +1,15 @@
 const Category = require("../models/category");
+const Blog = require("../models/blog");
 const slugify = require("slugify");
 const { errorHandler } = require("../helpers/dbErrorhandler");
 
-exports.create = (req, res) => {
+/**
+ * @function create
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const create = (req, res) => {
   const { name } = req.body;
   let slug = slugify(name).toLowerCase();
 
@@ -18,7 +25,13 @@ exports.create = (req, res) => {
   });
 };
 
-exports.list = (req, res) => {
+/**
+ * @function list
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const list = (req, res) => {
   Category.find({}).exec((err, data) => {
     if (err) {
       return res.status(400).json({
@@ -28,7 +41,14 @@ exports.list = (req, res) => {
     res.json(data);
   });
 };
-exports.read = (req, res) => {
+
+/**
+ * @function read
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const read = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Category.findOne({ slug }).exec((err, category) => {
     if (err) {
@@ -36,10 +56,32 @@ exports.read = (req, res) => {
         error: errorHandler(err)
       });
     }
-    res.json(category);
+    // res.json(category);
+    Blog.find({ categories: category })
+      .populate("categories", "_id name slug")
+      .populate("tags", "_id name slug")
+      .populate("postedBy", "_id name")
+      .select(
+        "_id title slug excerpt categories postedBy tags createdAt updatedAt"
+      )
+      .exec((err, data) => {
+        if (err) {
+          return res.status(400).json({
+            error: errorHandler(err)
+          });
+        }
+        res.json({ category: category, blogs: data });
+      });
   });
 };
-exports.remove = (req, res) => {
+
+/**
+ * @function remove
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const remove = (req, res) => {
   const slug = req.params.slug.toLowerCase();
   Category.findOneAndRemove({ slug }).exec((err, data) => {
     if (err) {
@@ -48,7 +90,14 @@ exports.remove = (req, res) => {
       });
     }
     res.json({
-        message: "Category deleted successfully"
+      message: "Category deleted successfully"
     });
   });
+};
+
+module.exports = {
+  create,
+  list,
+  read,
+  remove
 };

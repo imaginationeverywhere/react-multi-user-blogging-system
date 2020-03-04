@@ -1,3 +1,16 @@
-# react-multi-user-blogging-system
+# Multi User Admin Interface and Blogging System with SEO
 
- Real World Multi User Blogging Platform with SEO
+---
+
+## Features
+
+1. Seach
+2. User Public Profile
+3. User Private Profile
+4. User Blog CRUD
+5. Disqus Commenting System
+6. Contact Form
+7. Forget/Reset Password
+8. email confirmation on signup
+9. login with Google
+10. Deploy to aws

@@ -3,7 +3,13 @@ const shortId = require("shortid");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
-exports.signup = (req, res) => {
+/**
+ * @function signup
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec((err, user) => {
     if (user) {
       return res.status(400).json({
@@ -32,7 +38,13 @@ exports.signup = (req, res) => {
   });
 };
 
-exports.signin = (req, res) => {
+/**
+ * @function signin
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const signin = (req, res) => {
   const { email, password } = req.body;
   // if user exists
   User.findOne({ email }).exec((err, user) => {
@@ -62,18 +74,34 @@ exports.signin = (req, res) => {
   });
 };
 
-exports.singout = (req, res) => {
+/**
+ * @function signout
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ */
+const singout = (req, res) => {
   res.clearCookie("token");
   res.json({
     message: "Signout successful!!"
   });
 };
 
-exports.requireSignin = expressJwt({
+/**
+ * @function requireSignin
+ */
+const requireSignin = expressJwt({
   secret: process.env.JWT_SECRET
 });
 
-exports.authMiddleware = (req, res, next) => {
+/**
+ * @function authMiddleware
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ * @param {function} next
+ */
+const authMiddleware = (req, res, next) => {
   const authUserId = req.user._id;
   User.findById({ _id: authUserId }).exec((err, user) => {
     if (err || !user) {
@@ -86,7 +114,14 @@ exports.authMiddleware = (req, res, next) => {
   });
 };
 
-exports.adminMiddleware = (req, res, next) => {
+/**
+ * @function adminMiddleware
+ * @param {object} req
+ * @param {object} res
+ * @returns {void}
+ * @param {function} next
+ */
+const adminMiddleware = (req, res, next) => {
   const adminUserId = req.user._id;
   User.findById({ _id: adminUserId }).exec((err, user) => {
     if (err || !user) {
@@ -95,7 +130,7 @@ exports.adminMiddleware = (req, res, next) => {
       });
     }
 
-    if(user.role !== 1) {
+    if (user.role !== 1) {
       return res.status(400).json({
         error: "Admin resource. Access denied"
       });
@@ -104,4 +139,13 @@ exports.adminMiddleware = (req, res, next) => {
     req.profile = user;
     next();
   });
+};
+
+module.exports = {
+  signup,
+  signin,
+  singout,
+  requireSignin,
+  authMiddleware,
+  adminMiddleware
 };

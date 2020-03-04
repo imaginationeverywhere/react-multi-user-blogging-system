@@ -8,11 +8,11 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
-  NavbarBrand
+  NavLink
 } from "reactstrap";
 import { APP_NAME } from "../config";
 import { signout, isAuth } from "../actions/auth";
+import Search from "./blog/search";
 import "../node_modules/nprogress/nprogress.css";
 import "../static/css/styles.css";
 
@@ -20,13 +20,32 @@ Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
 Router.onRouteChangeError = url => NProgress.done();
 
+/**
+ * @file Header Component
+ * @function Header
+ * @param {object} props
+ * @returns {html}
+ * @summary Renders the header compoent
+ * @author Amen Ra
+ * @
+ */
 const Header = props => {
+  /**
+   * @constant {function} useState
+   * @type {boolean} @var isOpen
+   * @type {function} @var setOpen @param {boolean} isOpen
+   */
   const [isOpen, setIsOpen] = useState(false);
 
+  /**
+   * @function toggle
+   * @fires setOpen @param {boolean} isOpen
+   * @returns {void}
+   */
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar color="light" light expand="md">
         <Link href="/">
           {/* NavLink is an a tag from Reactstrap */}
@@ -84,7 +103,8 @@ const Header = props => {
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+      <Search />
+    </React.Fragment>
   );
 };
 

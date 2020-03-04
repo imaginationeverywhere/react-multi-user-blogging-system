@@ -1,30 +1,29 @@
 import Layout from "../../../components/Layout";
 import Admin from "../../../components/auth/Admin";
-import CreateBlog from "../../../components/crud/CreateBlog";
+import ReadBlogs from "../../../components/crud/ReadBlogs";
 
 /**
- * @file Create A Single Blog Page
- * @function Blog
+ * @file Manage Blogs Page
+ * @function Blogs
  * @param {object} props
  * @requires Layout
  * @requires Admin
- * @requires CreateBlog
+ * @requires ReadBlogs
  * @returns {html}
- * @summary Renders the html on the Admin Dashboard that
- * links to the Create Blog Page
+ * @summary This renders the Manage Blogs page
  * @author Amen Ra
  */
-const Blog = props => {
+const Blogs = props => {
   return (
     <Layout>
       <Admin>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className="col-md-12 pt-5 pb-5">
-              <h2>Create a new blog</h2>
+              <h2>Manage blogs</h2>
             </div>
-            <div className="col-md-12 pt-5 pb-5">
-              <CreateBlog />
+            <div className="col-md-12 pb-5">
+              <ReadBlogs />
             </div>
           </div>
         </div>
@@ -33,4 +32,4 @@ const Blog = props => {
   );
 };
 
-export default Blog;
+export default Blogs;
