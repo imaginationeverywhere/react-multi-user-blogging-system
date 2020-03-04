@@ -1,10 +1,23 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Router from "next/router";
-import { isAuth, getCookie } from "../../actions/auth";
+import { getCookie } from "../../actions/auth";
 import { create, getTags, removeTag } from "../../actions/tag";
 
-const Tag = () => {
+/**
+ * @file Tag Component
+ * @function Tag
+ * @external useEffect
+ * @external useState
+ * @param {*} props
+ * @requires getCookie
+ * @requires create
+ * @requires getTags
+ * @requires removeTag
+ * @returns {<Tag />}
+ * @summary This component is used on the Manage Categories and Tags Page
+ * {@link frontend/pages/admin/crud/category-tag.js}
+ * @author Amen Ra
+ */
+const Tag = props => {
   const [values, setValues] = useState({
     name: "",
     error: false,
@@ -17,6 +30,17 @@ const Tag = () => {
   const { name, error, success, tags, removed, reload } = values;
   const token = getCookie("token");
 
+  /**
+   * @external useEffect
+   * @fires loadTags
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the compoennt is mounted and loads a list of tags.
+   */
   useEffect(() => {
     loadTags();
   }, [reload]);
@@ -47,9 +71,7 @@ const Tag = () => {
   };
 
   const deleteConfirm = slug => {
-    let answer = window.confirm(
-      "Are you sure you want to delete this tag?"
-    );
+    let answer = window.confirm("Are you sure you want to delete this tag?");
     if (answer) {
       deleteTag(slug);
     }

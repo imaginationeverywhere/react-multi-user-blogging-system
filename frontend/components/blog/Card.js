@@ -3,7 +3,28 @@ import renderHTML from "react-render-html";
 import moment from "moment";
 import { API } from "../../config";
 
+/**
+ * @file React Card Component
+ * @function Card
+ * @param {*} this.props.blog
+ * @external renderedHTML
+ * @external moment
+ * @external Link
+ * @requires API
+ * @method showBlogCategories*
+ * @returns {html}
+ * @summary This is used to display blog data in a blog list or related blogs
+ * {@link frontend/pages/blogs/index.js}
+ * {@link frontend/pages/categories/[slug].js}
+ * @author Amen Ra
+ */
 const Card = ({ blog }) => {
+  /**
+   * @function showBlogCategories
+   * @param {arrau} blog
+   * @returns {html}
+   * @summary Shows a list of Blog Categories
+   */
   const showBlogCategories = blog =>
     blog.categories.map((c, i) => (
       <Link key={i} href={`/categories/${c.slug}`}>
@@ -11,6 +32,12 @@ const Card = ({ blog }) => {
       </Link>
     ));
 
+  /**
+   * @function showBlogTags
+   * @param {array} blog
+   * @returns {html}
+   * @summary Shows a list of Blog tags
+   */
   const showBlogTags = blog =>
     blog.tags.map((t, i) => (
       <Link key={i} href={`/tags/${t.slug}`}>
@@ -43,7 +70,7 @@ const Card = ({ blog }) => {
         <div className="col-md-4">
           <section>
             <img
-              style={{ maxHeight: "150px", width: "auto" }}
+              style={{ maxHeight: "auto", width: "100%" }}
               src={`${API}/blog/photo/${blog.slug}`}
               className="img img-fluid"
               alt={blog.title}

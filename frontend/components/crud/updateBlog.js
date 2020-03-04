@@ -1,48 +1,26 @@
 import { useState, useEffect } from "react";
+import Router from "next/router";
 import dynamic from "next/dynamic";
 import { withRouter } from "next/router";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import { getCookie } from "../../actions/auth";
+import { getCookie, isAuth } from "../../actions/auth";
 import { getCategories } from "../../actions/category";
 import { getTags } from "../../actions/tag";
-import { createBlog } from "../../actions/blog";
+import { singleBlog, updateBlog } from "../../actions/blog";
 import { QuillModules, QuillFormats } from "../../helpers/quill";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "../../node_modules/react-quill/dist/quill.snow.css";
+import { API } from "../../config";
 
 /**
- * @file Create Blog Component
- * @function CreateBlog
+ * @file Update Blog Compoent
+ * @function UpdateBlog
  * @param {*} props
  * @param {props} props.router
- * @external useState
- * @external useEffect
- * @external dynamic
- * @external withRouter
- * @external ReactQuill
- * @requires getCookie
- * @requires getCategories
- * @requires getTags
- * @requires createBlog
- * @requires QuillModules
- * @requires QuillFormates
- * @returns {<CreateBlog />}
- * @summary This component is used on the Create Blog Page
- * {@link frontend/pages/admin/crud/blog.js}
+ * @returns {<UpdateBlog />}
  * @author Amen Ra
  */
-const CreateBlog = ({ router }) => {
-  const blogFromLS = () => {
-    // if the window is not available
-    if (typeof window === "undefined") {
-      return false;
-    }
-
-    if (localStorage.getItem("blog")) {
-      return JSON.parse(localStorage.getItem("blog"));
-    } else {
-      return false;
-    }
-  };
+const UpdateBlog = ({ router }) => {
+  const [body, setBody] = useState("");
 
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -50,40 +28,74 @@ const CreateBlog = ({ router }) => {
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedTag, setCheckedTag] = useState([]);
 
-  const [body, setBody] = useState(blogFromLS());
-
   const [values, setValues] = useState({
+    title: "",
     error: "",
-    sizeError: "",
     success: "",
     formData: "",
     title: "",
-    hidePublishButton: false
+    body: ""
   });
 
-  const {
-    error,
-    sizeError,
-    success,
-    formData,
-    title,
-    hidePublishButton
-  } = values;
-
+  const { error, success, formData, title } = values;
   const token = getCookie("token");
 
+  /**
+   * @external useEffect
+   * @fires setValues
+   * @fires initBlog
+   * @fires initCategories
+   * @fires initTags
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the compoennt is mounted and loads
+   * the existing blog content which is the FormData
+   * the actual blog
+   * list of categories associated with this blog
+   * list tags associated with this log
+   */
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });
+    initBlog();
     initCategories();
     initTags();
   }, [router]);
 
-  /**
-   * @function initCategories
-   * @returns {void}
-   * @summary Api GET request to retrieve categories that are already in the
-   * database from the backend
-   */
+  const initBlog = () => {
+    if (router.query.slug) {
+      singleBlog(router.query.slug).then(data => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          setValues({ ...values, title: data.title });
+          setBody(data.body);
+          setCategoriesArray(data.categories);
+          setTagsArray(data.tags);
+        }
+      });
+    }
+  };
+
+  const setCategoriesArray = blogCategories => {
+    let ca = [];
+    blogCategories.map((c, i) => {
+      ca.push(c._id);
+    });
+    setCheckedCategory(ca);
+  };
+
+  const setTagsArray = blogTags => {
+    let ta = [];
+    blogTags.map((t, i) => {
+      ta.push(t._id);
+    });
+    setCheckedTag(ta);
+  };
+
   const initCategories = () => {
     getCategories().then(data => {
       if (data.error) {
@@ -94,12 +106,6 @@ const CreateBlog = ({ router }) => {
     });
   };
 
-  /**
-   * @function initTags
-   * @returns {void}
-   * @summary Api GET request to retrieve tags that are already in the
-   * database from the backend
-   */
   const initTags = () => {
     getTags().then(data => {
       if (data.error) {
@@ -110,67 +116,6 @@ const CreateBlog = ({ router }) => {
     });
   };
 
-  /**
-   * @function publishBlog
-   * @param {event} e
-   * @returns {void}
-   * @summary createBlogForm onSubmit method that POSTS data back to the backend to create a blog
-   */
-  const publishBlog = e => {
-    e.preventDefault();
-    // console.log("ready to publish blog");
-    createBlog(formData, token).then(data => {
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-      } else {
-        setValues({
-          ...values,
-          title: "",
-          error: "",
-          success: `A new blog titled "${data.title}" is created`
-        });
-        setBody("");
-        setCategories([]);
-        setTags([]);
-      }
-    });
-  };
-
-  /**
-   * @function handleChange
-   * @param {function} e event
-   * @param {Array} name
-   * @method setValues React Hook
-   * @summary Getting values as they are entered into inputs on the Create Blog page
-   * @return {void}
-   */
-  const handleChange = name => e => {
-    // console.log(e.target.value);
-    const value = name === "photo" ? e.target.files[0] : e.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value, formData, error: "" });
-  };
-
-  /**
-   * @function handleBody
-   * @param {event} e
-   * @returns {void}
-   */
-  const handleBody = e => {
-    // console.log(e);
-    setBody(e);
-    formData.set("body", e);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("blog", JSON.stringify(e));
-    }
-  };
-
-  /**
-   * @function handleToggleCategory
-   * @param {event} c
-   * @returns {void}
-   * @summary Records if a category is checked or unchecked in the database
-   */
   const handleToggleCategory = c => () => {
     setValues({ ...values, error: "" });
     const all = [...checkedCategory];
@@ -182,17 +127,11 @@ const CreateBlog = ({ router }) => {
       all.splice(clickedCategory, 1);
     }
 
-    // console.log(all);
+    console.log(all);
     setCheckedCategory(all);
     formData.set("categories", all);
   };
 
-  /**
-   * @function handleToggleTag
-   * @param {event} t
-   * @returns {void}
-   * @summary Records if a tag is checked or unchecked in the database
-   */
   const handleToggleTag = t => () => {
     setValues({ ...values, error: "" });
     const all = [...checkedTag];
@@ -204,22 +143,36 @@ const CreateBlog = ({ router }) => {
       all.splice(clickedTag, 1);
     }
 
-    // console.log(all);
+    console.log(all);
     setCheckedTag(all);
     formData.set("tags", all);
   };
 
-  /**
-   * @function showCategories
-   * @returns {Array} of checkboxes and labels
-   * @summary Displays a checkbox for every category that exists in the database
-   */
+  const findCheckCategory = c => {
+    const result = checkedCategory.indexOf(c);
+    if (result !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const findCheckTag = t => {
+    const result = checkedTag.indexOf(t);
+    if (result !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const showCategories = () => {
     return (
       categories &&
       categories.map((c, i) => (
         <li key={i} className="list-unstyled">
           <input
+            checked={findCheckCategory(c._id)}
             onChange={handleToggleCategory(c._id)}
             type="checkbox"
             className="mr-2"
@@ -230,17 +183,13 @@ const CreateBlog = ({ router }) => {
     );
   };
 
-  /**
-   * @function showTags
-   * @returns {Array} of checkboxes and labels
-   * @summary Displays a checkbox for every category that exists in the database
-   */
   const showTags = () => {
     return (
       tags &&
       tags.map((t, i) => (
         <li key={i} className="list-unstyled">
           <input
+            checked={findCheckTag(t._id)}
             onChange={handleToggleTag(t._id)}
             type="checkbox"
             className="mr-2"
@@ -251,11 +200,40 @@ const CreateBlog = ({ router }) => {
     );
   };
 
-  /**
-   * @function showError
-   * @returns {String} Error Message
-   * @summary Shows an error message when a blog is not successfully created
-   */
+  const handleChange = name => e => {
+    // console.log(e.target.value);
+    const value = name === "photo" ? e.target.files[0] : e.target.value;
+    formData.set(name, value);
+    setValues({ ...values, [name]: value, formData, error: "" });
+  };
+
+  const handleBody = e => {
+    setBody(e);
+    formData.set("body", e);
+  };
+
+  const editBlog = e => {
+    e.preventDefault();
+    updateBlog(formData, token, router.query.slug).then(data => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          title: "",
+          success: `Blog titled "${data.title}" is successfully updated`
+        });
+        if (isAuth() && isAuth().role === 1) {
+          Router.replace(`/admin/crud/${router.query.slug}`);
+          // Router.replace(`/admin`);
+        } else if (isAuth() && isAuth().role === 0) {
+          // Router.replace(`/user/crud/${router.query.slug}`);
+          Router.replace(`/user`);
+        }
+      }
+    });
+  };
+
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -265,11 +243,6 @@ const CreateBlog = ({ router }) => {
     </div>
   );
 
-  /**
-   * @function showSuccess
-   * @returns {String} Success Message
-   * @summary Shows an success message when a blog is successfully created
-   */
   const showSuccess = () => (
     <div
       className="alert alert-success"
@@ -279,20 +252,15 @@ const CreateBlog = ({ router }) => {
     </div>
   );
 
-  /**
-   * @function createBlogForm
-   * @returns {*} Title Input and Quill Editor
-   * @summary This return the Input to Enter a Blog Title and the Quill Editor
-   * to put content in the blog
-   */
-  const createBlogForm = () => {
+  const updateBlogForm = () => {
     return (
-      <form onSubmit={publishBlog}>
+      <form onSubmit={editBlog}>
         <div className="form-group">
           <label className="text-muted">Title</label>
           <input
             type="text"
             className="form-control"
+            value={title}
             onChange={handleChange("title")}
           />
         </div>
@@ -308,8 +276,8 @@ const CreateBlog = ({ router }) => {
         </div>
 
         <div>
-          <button className="btn btn-primary" type="submit">
-            Publish
+          <button type="submit" className="btn btn-primary">
+            Update
           </button>
         </div>
       </form>
@@ -317,14 +285,21 @@ const CreateBlog = ({ router }) => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid pb5">
       <div className="row">
         <div className="col-md-8">
-          {createBlogForm()}
+          {updateBlogForm()}
           <div className="pt-3">
-            {showError()}
             {showSuccess()}
+            {showError()}
           </div>
+          {body && (
+            <img
+              src={`${API}/blog/photo/${router.query.slug}`}
+              alt={title}
+              style={{ width: "100%" }}
+            />
+          )}
         </div>
 
         <div className="col-md-4">
@@ -364,4 +339,4 @@ const CreateBlog = ({ router }) => {
   );
 };
 
-export default withRouter(CreateBlog);
+export default withRouter(UpdateBlog);
