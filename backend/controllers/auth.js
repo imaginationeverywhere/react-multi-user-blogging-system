@@ -2,6 +2,7 @@ const User = require("../models/user");
 const shortId = require("shortid");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
+const { errorHandler } = require("../helpers/dbErrorHandler");
 
 /**
  * @function signup
@@ -141,11 +142,38 @@ const adminMiddleware = (req, res, next) => {
   });
 };
 
+/**
+ * @function canUpdateDeleteBlog
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ * @returns {void}
+ */
+const canUpdateDeleteBlog = (req, res, next) => {
+  const slug = req.params.slug.toLowerCase();
+  Blog.findOne({ slug }).exec((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err)
+      });
+    }
+    let authorizedUser =
+      data.postedBy._id.toString() === req.profile._id.toString();
+    if (!authorizedUser) {
+      return res.status(400).json({
+        error: "You are not authorized"
+      });
+    }
+    next();
+  });
+};
+
 module.exports = {
   signup,
   signin,
   singout,
   requireSignin,
   authMiddleware,
-  adminMiddleware
+  adminMiddleware,
+  canUpdateDeleteBlog
 };

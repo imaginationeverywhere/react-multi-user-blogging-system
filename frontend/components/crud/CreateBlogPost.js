@@ -30,7 +30,7 @@ import "../../node_modules/react-quill/dist/quill.snow.css";
  * {@link frontend/pages/admin/crud/blog.js}
  * @author Amen Ra
  */
-const CreateBlog = ({ router }) => {
+const CreateBlogPost = ({ router }) => {
   /**
    * @function blogFromLS
    * @returns {JSON}
@@ -454,4 +454,4 @@ const CreateBlog = ({ router }) => {
   );
 };
 
-export default withRouter(CreateBlog);
+export default withRouter(CreateBlogPost);

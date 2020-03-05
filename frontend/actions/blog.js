@@ -1,17 +1,27 @@
 import fetch from "isomorphic-fetch";
 import { API } from "../config";
 import queryString from "query-string";
+import { isAuth } from "./auth";
 
 /**
  * @function createBlog
  * @param {object} blog
  * @param {string} token
+ * @fires isAuth
  * @returns {JSON}
  * @summary POST Api Call to send data to the backend
  * to create a blog
  */
 export const createBlog = (blog, token) => {
-  return fetch(`${API}/blog`, {
+  let createBlogEndpoint;
+
+  if (isAuth() && isAuth().role === 1) {
+    createBlogEndpoint = `${API}/blog`;
+  } else if (isAuth() && isAuth().role === 0) {
+    createBlogEndpoint = `${API}/user/blog`;
+  }
+
+  return fetch(`${createBlogEndpoint}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -93,9 +103,78 @@ export const listRelated = blog => {
  * @returns {JSON}
  * @summary GET Api Call to get all blogs
  */
-export const list = () => {
-  return fetch(`${API}/blogs`, {
+export const list = username => {
+  let listBlogsEndpoint;
+
+  if (username) {
+    listBlogsEndpoint = `${API}/${username}/blogs`;
+  } else {
+    listBlogsEndpoint = `${API}/blogs`;
+  }
+
+  return fetch(`${listBlogsEndpoint}`, {
     method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+/**
+ * @function removeBlog
+ * @param {string} slug
+ * @param {string} token
+ * @returns {JSON}
+ * @summary DELETE Api Call to the backend to delete an individual blog
+ */
+export const removeBlog = (slug, token) => {
+  let deleteBlogEndpoint;
+
+  if (isAuth() && isAuth().role === 1) {
+    deleteBlogEndpoint = `${API}/blog/${slug}`;
+  } else if (isAuth() && isAuth().role === 0) {
+    deleteBlogEndpoint = `${API}/user/blog/${slug}`;
+  }
+
+  return fetch(`${deleteBlogEndpoint}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+/**
+ * @function updateBlog
+ * @param {object} blog
+ * @param {string} token
+ * @param {string} slug
+ * @returns {JSON}
+ * @summary PUT Api Call to send data the backend to update a single blog
+ */
+export const updateBlog = (blog, token, slug) => {
+  let updateBlogEndpoint;
+
+  if (isAuth() && isAuth().role === 1) {
+    updateBlogEndpoint = `${API}/blog/${slug}`;
+  } else if (isAuth() && isAuth().role === 0) {
+    updateBlogEndpoint = `${API}/user/blog/${slug}`;
+  }
+
+  return fetch(`${updateBlogEndpoint}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: blog
   })
     .then(response => {
       return response.json();
@@ -121,51 +200,6 @@ export const listSearch = params => {
   console.log("query param", params);
   return fetch(`${API}/blogs/search?${query}`, {
     method: "GET"
-  })
-    .then(response => {
-      return response.json();
-    })
-    .catch(err => console.log(err));
-};
-
-/**
- * @function removeBlog
- * @param {string} slug
- * @param {string} token
- * @returns {JSON}
- * @summary DELETE Api Call to the backend to delete an individual blog
- */
-export const removeBlog = (slug, token) => {
-  return fetch(`${API}/blog/${slug}`, {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then(response => {
-      return response.json();
-    })
-    .catch(err => console.log(err));
-};
-
-/**
- * @function updateBlog
- * @param {object} blog
- * @param {string} token
- * @param {string} slug
- * @returns {JSON}
- * @summary PUT Api Call to send data the backend to update a single blog
- */
-export const updateBlog = (blog, token, slug) => {
-  return fetch(`${API}/blog/${slug}`, {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: blog
   })
     .then(response => {
       return response.json();

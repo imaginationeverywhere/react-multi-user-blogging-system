@@ -74,6 +74,13 @@ const Header = props => {
                     <NavLink>Signup</NavLink>
                   </Link>
                 </NavItem>
+                <NavItem>
+                  <Link href="/user/crud/create">
+                    <NavLink className="btn btn-primary text-white">
+                      Write A Post
+                    </NavLink>
+                  </Link>
+                </NavItem>
               </React.Fragment>
             )}
 

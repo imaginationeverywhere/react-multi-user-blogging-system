@@ -1,27 +1,27 @@
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import moment from "moment";
+import { useState, useEffect } from "react";
 import { getCookie, isAuth } from "../../actions/auth";
 import { list, removeBlog } from "../../actions/blog";
+import moment from "moment";
 
 /**
- * @file ReadBlogs Component
- * @function Readblogs
- * @param {*} props
- * @external useState
- * @external useEffect
+ * @function BlogRead
+ * @param {object} props
+ * @param {string} props.username
  * @external Link
- * @external moment
+ * @fires useState
+ * @fires useEffect
  * @requires getCookie
  * @requires isAuth
  * @requires list
  * @requires removeBlog
+ * @external moment
  * @returns {html}
- * @summary This is the compoent that is used on the Managed Blogs Page
- * {@link frontend/pages/admin/crud/blogs.js}
+ * @summary This is the component that has the functionality
+ * to update and delete blogs by an authenticated user
  * @author Amen Ra
  */
-const ReadBlogs = props => {
+const BlogRead = ({ username }) => {
   const [blogs, setBlogs] = useState([]);
   const [message, setMessage] = useState("");
   const token = getCookie("token");
@@ -48,7 +48,7 @@ const ReadBlogs = props => {
    * @summary Displays list of every category that exists in the database
    */
   const loadBlogs = () => {
-    list().then(data => {
+    list(username).then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -57,12 +57,6 @@ const ReadBlogs = props => {
     });
   };
 
-  /**
-   * @function deleteBlog
-   * @param {String} slug
-   * @returns {void}
-   * @summary Deletes a blog that is store in the database on the backend
-   */
   const deleteBlog = slug => {
     removeBlog(slug, token).then(data => {
       if (data.error) {
@@ -74,29 +68,17 @@ const ReadBlogs = props => {
     });
   };
 
-  /**
-   * @function deleteConfirm
-   * @param {String} slug
-   * @returns {void}
-   * @summary Displays a display prompt when attempting to delete a blog
-   */
   const deleteConfirm = slug => {
-    let answer = window.confirm("Are you sure you want to delete this blog?");
+    let answer = window.confirm("Are you sure you want to delete your blog?");
     if (answer) {
       deleteBlog(slug);
     }
   };
 
-  /**
-   * @function showUpdateButton
-   * @param {String} blog
-   * @returns {HTML} Link Component
-   * @summary Renders the Update Blog Button
-   */
   const showUpdateButton = blog => {
     if (isAuth() && isAuth().role === 0) {
       return (
-        <Link href={`/user/crud/blog/${blog.slug}`}>
+        <Link href={`/user/crud/${blog.slug}`}>
           <a className="ml-2 btn btn-sm btn-warning">Update</a>
         </Link>
       );
@@ -109,19 +91,13 @@ const ReadBlogs = props => {
     }
   };
 
-  /**
-   * @function showAllBlogs
-   * @param {String} blog
-   * @returns {HTML}
-   * @summary Renders the Blog List and Update Blog and Delete Button
-   */
   const showAllBlogs = () => {
     return blogs.map((blog, i) => {
       return (
         <div key={i} className="pb-5">
           <h3>{blog.title}</h3>
           <p className="mark">
-            Written By {blog.postedBy.name} | Published{" "}
+            Written by {blog.postedBy.name} | Published on{" "}
             {moment(blog.updatedAt).fromNow()}
           </p>
           <button
@@ -148,4 +124,4 @@ const ReadBlogs = props => {
   );
 };
 
-export default ReadBlogs;
+export default BlogRead;

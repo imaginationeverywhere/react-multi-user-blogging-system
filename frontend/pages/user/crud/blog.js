@@ -1,5 +1,5 @@
 import Layout from "../../../components/Layout";
-import Admin from "../../../components/auth/Admin";
+import Private from "../../../components/auth/Private";
 import CreateBlogPost from "../../../components/crud/CreateBlogPost";
 
 /**
@@ -7,17 +7,17 @@ import CreateBlogPost from "../../../components/crud/CreateBlogPost";
  * @function Blog
  * @param {object} props
  * @requires Layout
- * @requires Admin
+ * @requires Private
  * @requires CreateBlog
  * @returns {html}
- * @summary Renders the html on the Admin Dashboard that
+ * @summary Renders the html on the User Dashboard that
  * links to the Create Blog Page
  * @author Amen Ra
  */
-const Blog = props => {
+const CreatePost = props => {
   return (
     <Layout>
-      <Admin>
+      <Private>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12 pt-5 pb-5">
@@ -28,9 +28,9 @@ const Blog = props => {
             </div>
           </div>
         </div>
-      </Admin>
+      </Private>
     </Layout>
   );
 };
 
-export default Blog;
+export default CreatePost;

@@ -7,7 +7,7 @@
 1. Seach
 2. User Public Profile
 3. User Private Profile
-4. User Blog CRUD
+4. User Blog CRUD for Authenticated Users
 5. Disqus Commenting System
 6. Contact Form
 7. Forget/Reset Password
