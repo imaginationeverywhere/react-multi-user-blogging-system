@@ -1,7 +1,27 @@
 # Notes
 
-## For Creating a blog body in postmanb
+## General Admin Tasks to complete
 
-```html <p>Content of blog thre. </p> <p>At leaset one category is required. </p><p>At least one tag is required. .</p>
-<p>This blog also needs a title. </p><p>This blog also needs a photo.</p><p>This blog post also has a meta title</p><p>This blog post also has a meta descriiption</p>
-`
+1. Finish Up Default User Profile
+2. Give default users the ability to create content
+3. Token expiration and Chat and commenting system
+4. Sending emaails with Sendgrid
+5. Password forgot and reset
+6. Activation and Signup
+7. Social Login with Google
+8. Google Analytics
+
+## General Shopping Cart Tasks to complete
+
+1. Shop page with search filter by Category and Price Range
+2. Products Search
+3. Products page with Related Products
+4. Cart CRUD with LocalStorage
+5. Payment Gateway (Credit Card and PayPal) with Braintree and Stripe
+6. Orders
+7. Manage Orders and Products by Admin Page
+
+## General Developer Task to complete
+
+1. Refactor code with Typescript
+2. Paint the Web and App Interface with React Prime custom template

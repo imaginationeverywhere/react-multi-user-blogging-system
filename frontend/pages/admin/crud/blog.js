@@ -1,9 +1,20 @@
 import Layout from "../../../components/Layout";
 import Admin from "../../../components/auth/Admin";
-import CreateBlog from "../../../components/crud/CreateBlog";
-import Link from "next/link";
+import CreateBlogPost from "../../../components/crud/CreateBlogPost";
 
-const Blog = () => {
+/**
+ * @file Create A Single Blog Page
+ * @function Blog
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires CreateBlog
+ * @returns {html}
+ * @summary Renders the html on the Admin Dashboard that
+ * links to the Create Blog Page
+ * @author Amen Ra
+ */
+const Blog = props => {
   return (
     <Layout>
       <Admin>
@@ -13,7 +24,7 @@ const Blog = () => {
               <h2>Create a new blog</h2>
             </div>
             <div className="col-md-12 pt-5 pb-5">
-              <CreateBlog />
+              <CreateBlogPost />
             </div>
           </div>
         </div>
