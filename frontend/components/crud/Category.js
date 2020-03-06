@@ -7,12 +7,12 @@ import { create, getCategories, removeCategory } from "../../actions/category";
  * @function Category
  * @external useEffect
  * @external useState
- * @param {*} props
+ * @param {object} props
  * @requires getCookie
  * @requires create
  * @requires getCategories
  * @requires removeCategory
- * @returns {<Category />}
+ * @returns {html}
  * @summary This component is used on the Manage Categories and Tags Page
  * {@link frontend/pages/admin/crud/category-tag.js}
  * @returns {html}

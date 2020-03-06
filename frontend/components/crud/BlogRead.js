@@ -22,8 +22,24 @@ import moment from "moment";
  * @author Amen Ra
  */
 const BlogRead = ({ username }) => {
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {array} @var blogs
+   * @type {function} @function setBlogs @returns {void}
+   */
   const [blogs, setBlogs] = useState([]);
+
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {string} @var message
+   * @type {function} @function setMessage @returns {void}
+   */
   const [message, setMessage] = useState("");
+
+  /**
+   * @constant {function} token
+   * @fires getCookie @param {string}
+   */
   const token = getCookie("token");
 
   /**
@@ -57,6 +73,12 @@ const BlogRead = ({ username }) => {
     });
   };
 
+  /**
+   * @function deleteBlog
+   * @param {String} slug
+   * @returns {void}
+   * @summary Deletes a blog that is store in the database on the backend
+   */
   const deleteBlog = slug => {
     removeBlog(slug, token).then(data => {
       if (data.error) {
@@ -68,6 +90,12 @@ const BlogRead = ({ username }) => {
     });
   };
 
+  /**
+   * @function deleteConfirm
+   * @param {String} slug
+   * @returns {void}
+   * @summary Displays a display prompt when attempting to delete a blog
+   */
   const deleteConfirm = slug => {
     let answer = window.confirm("Are you sure you want to delete your blog?");
     if (answer) {
@@ -75,6 +103,12 @@ const BlogRead = ({ username }) => {
     }
   };
 
+  /**
+   * @function showUpdateButton
+   * @param {String} blog
+   * @returns {HTML} Link Component
+   * @summary Renders the Update Blog Button
+   */
   const showUpdateButton = blog => {
     if (isAuth() && isAuth().role === 0) {
       return (
@@ -91,6 +125,12 @@ const BlogRead = ({ username }) => {
     }
   };
 
+  /**
+   * @function showAllBlogs
+   * @param {String} blog
+   * @returns {HTML}
+   * @summary Renders the Blog List and Update Blog and Delete Button
+   */
   const showAllBlogs = () => {
     return blogs.map((blog, i) => {
       return (

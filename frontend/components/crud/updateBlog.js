@@ -16,28 +16,85 @@ import { API } from "../../config";
  * @function UpdateBlog
  * @param {*} props
  * @param {props} props.router
+ * @external Router
+ * @external useEffect
+ * @external useState
+ * @external dynamic
+ * @external withRouter
+ * @requires isAuth
+ * @requires getCookie
+ * @requires getCategories
+ * @requires singleBlog
+ * @requires updateBlog
+ * @requires API
+ * @constant {function} ReactQuill @fires dynamic
+ * @summary This component is used on the Update Single Blogs Page
+ * {@link frontend/pages/user/crud/{slug}.js}
  * @returns {html}
  * @author Amen Ra
  */
 const UpdateBlog = ({ router }) => {
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {string} @var body
+   * @type {function} @function setBody @returns {void}
+   */
   const [body, setBody] = useState("");
 
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {array} @var categories
+   * @type {function} @function setCategories @returns {void}
+   */
   const [categories, setCategories] = useState([]);
+
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {array} @var tags
+   * @type {function} @function setTags @returns {void}
+   */
   const [tags, setTags] = useState([]);
 
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {array} @var checkedCategory
+   * @type {function} @function setCheckedCategory @returns {void}
+   */
   const [checkedCategory, setCheckedCategory] = useState([]);
+
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {array} @var checkedTag
+   * @type {function} @function setCheckedTag @returns {void}
+   */
   const [checkedTag, setCheckedTag] = useState([]);
 
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {object} @var values
+   * @type {function} @function setValues @returns {void}
+   */
   const [values, setValues] = useState({
     title: "",
     error: "",
     success: "",
     formData: "",
-    title: "",
     body: ""
   });
 
+  /**
+   * @constant {object} values
+   * @type {string} @var title
+   * @type {string} @var error
+   * @type {string} @var success
+   * @type {string} @var formData
+   */
   const { error, success, formData, title } = values;
+
+  /**
+   * @constant {function} token
+   * @fires getCookie @param {string}
+   */
   const token = getCookie("token");
 
   /**
@@ -333,11 +390,11 @@ const UpdateBlog = ({ router }) => {
           success: `Blog titled "${data.title}" is successfully updated`
         });
         if (isAuth() && isAuth().role === 1) {
-          Router.replace(`/admin/crud/${router.query.slug}`);
-          // Router.replace(`/admin`);
+          // Router.replace(`/admin/crud/${router.query.slug}`);
+          Router.replace(`/admin/crud/blogs`);
         } else if (isAuth() && isAuth().role === 0) {
           // Router.replace(`/user/crud/${router.query.slug}`);
-          Router.replace(`/user`);
+          Router.replace(`/user/crud/blogs`);
         }
       }
     });

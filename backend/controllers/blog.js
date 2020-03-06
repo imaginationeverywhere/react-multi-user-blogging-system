@@ -247,6 +247,7 @@ const remove = (req, res) => {
  */
 const update = (req, res) => {
   const slug = req.params.slug.toLowerCase();
+
   Blog.findOne({ slug }).exec((err, oldBlog) => {
     if (err) {
       return res.status(400).json({
@@ -268,11 +269,11 @@ const update = (req, res) => {
       oldBlog = _.merge(oldBlog, fields);
       oldBlog.slug = slugBeforeMerge;
 
-      const { body, mdesc, categories, tags } = fields;
+      const { body, desc, categories, tags } = fields;
 
       if (body) {
         oldBlog.excerpt = smartTrim(body, 320, " ", " ...");
-        oldBlog.mdesc = stripHtml(body.substring(0, 160));
+        oldBlog.desc = stripHtml(body.substring(0, 160));
       }
 
       if (categories) {
@@ -291,7 +292,6 @@ const update = (req, res) => {
         }
         oldBlog.photo.data = fs.readFileSync(files.photo.path);
         oldBlog.photo.contentType = files.photo.type;
-        ``;
       }
 
       oldBlog.save((err, result) => {
@@ -300,6 +300,7 @@ const update = (req, res) => {
             error: errorHandler(err)
           });
         }
+        // result.photo = undefined;
         res.json(result);
       });
     });
