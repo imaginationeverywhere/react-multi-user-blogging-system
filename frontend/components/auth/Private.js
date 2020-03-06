@@ -6,8 +6,11 @@ import { isAuth } from "../../actions/auth";
  * @file Private Component
  * @function Private
  * @param {object} this.props.childre
+ * @external useEffct
+ * @external Router
+ * @requires isAuth
  * @returns {html}
- * @summary Renders Private component html and css
+ * @summary If a user is not signed in redirects the user to the sign in page.
  * @author Amen Ra
  */
 const Private = ({ children }) => {

@@ -1,6 +1,31 @@
 import fetch from "isomorphic-fetch";
 import cookie from "js-cookie";
 import { API } from "../config";
+import Router from "next/router";
+
+/**
+ * @function handleResponse
+ * @param {object} response
+ * @fires signout @returns {void}
+ * @fires removeCookie @returns {void}
+ * @fires removeLocalStorage @returns {void}
+ * @returns {void}
+ * @summary Redirects the user to the login page when the JWT token expires
+ */
+export const handleResponse = response => {
+  if (response.status === 401) {
+    signout(() => {
+      Router.push({
+        pathname: "/signin",
+        query: {
+          message: "Your session is expired. Please signin again"
+        }
+      });
+    });
+  } else {
+    return;
+  }
+};
 
 /**
  * @function signup

@@ -75,7 +75,7 @@ const Header = props => {
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link href="/user/crud/create">
+                  <Link href="/user/crud/blog">
                     <NavLink className="btn btn-primary text-white">
                       Write A Post
                     </NavLink>
@@ -85,18 +85,36 @@ const Header = props => {
             )}
 
             {isAuth() && isAuth().role === 0 && (
-              <NavItem>
-                <Link href="/user">
-                  <NavLink>{`${isAuth().name}`}'s Dashboard</NavLink>
-                </Link>
-              </NavItem>
+              <React.Fragment>
+                <NavItem>
+                  <Link href="/user">
+                    <NavLink>{`${isAuth().name}`}'s Dashboard</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link href="/user/crud/blog">
+                    <NavLink className="btn btn-primary text-white">
+                      Write A Post
+                    </NavLink>
+                  </Link>
+                </NavItem>
+              </React.Fragment>
             )}
             {isAuth() && isAuth().role === 1 && (
-              <NavItem>
-                <Link href="/admin">
-                  <NavLink>{`${isAuth().name}`}'s Dashboard</NavLink>
-                </Link>
-              </NavItem>
+              <React.Fragment>
+                <NavItem>
+                  <Link href="/admin">
+                    <NavLink>{`${isAuth().name}`}'s Dashboard</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link href="/admin/crud/blog">
+                    <NavLink className="btn btn-primary text-white">
+                      Write A Post
+                    </NavLink>
+                  </Link>
+                </NavItem>
+              </React.Fragment>
             )}
             {isAuth() && (
               <NavItem>

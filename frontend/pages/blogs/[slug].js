@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "../../components/Layout";
 import { useState, useEffect } from "react";
-import { singleBlog, listRelated } from "../../actions/blog";
-import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
 import renderHTML from "react-render-html";
 import moment from "moment";
+import Layout from "../../components/Layout";
+import { singleBlog, listRelated } from "../../actions/blog";
+import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
 import SmallCard from "../../components/blog/SmallCard";
+import DisqusThread from "../../components/DisqusThread";
 
 /**
  * @file Single Blog Page
@@ -14,6 +15,21 @@ import SmallCard from "../../components/blog/SmallCard";
  * @param {object} props
  * @param {object} props.blog
  * @param {object} props.query
+ * @external Head
+ * @external Link
+ * @external useState
+ * @external useEffect
+ * @external renderHTML
+ * @external moment
+ * @requires Layout
+ * @requires singleBlog
+ * @requires listRelated
+ * @requires API
+ * @requires DOMAIN
+ * @requires APP_NAME
+ * @requires FB_APP_ID
+ * @requires SmallCard
+ * @requires DisqusThread
  * @returns {html}
  * @summary Renders the Single Blog Page
  * @author Amen Ra
@@ -132,6 +148,23 @@ const SingleBlog = ({ blog, query }) => {
     ));
   };
 
+  /**
+   * @function showComments
+   * @returns {html}
+   * @summary Renders each group of comments that is associated with this blog
+   */
+  const showComments = () => {
+    return (
+      <div>
+        <DisqusThread
+          id={blog.id}
+          title={blog.title}
+          path={`/blog/${blog.slug}`}
+        />
+      </div>
+    );
+  };
+
   return (
     <React.Fragment>
       {head()}
@@ -186,9 +219,7 @@ const SingleBlog = ({ blog, query }) => {
               </div>
             </div>
 
-            <div className="container pb-5">
-              <p>show comments</p>
-            </div>
+            <div className="container pt-5 pb-5">{showComments()}</div>
           </article>
         </main>
       </Layout>

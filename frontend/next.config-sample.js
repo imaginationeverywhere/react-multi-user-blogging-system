@@ -1,4 +1,4 @@
-const withCSS = require("@zeit/next-css")
+const withCSS = require("@zeit/next-css");
 
 module.exports = withCSS({
   publicRuntimeConfig: {
@@ -6,8 +6,9 @@ module.exports = withCSS({
     API_DEVELOPMENT: "http://localhost:8085/api",
     API_PRODUCTION: "https://imaginationeverywhere.info",
     PRODUCTION: false,
-    DOMAIN_DEVELOPMEWNT: 'http://localhost:3085',
-    DOMAIN_PRODUCTION: 'http://imaginationeverywhere.info',
-    FB_APP_ID: '168041061141989'
+    DOMAIN_DEVELOPMEWNT: "http://localhost:3085",
+    DOMAIN_PRODUCTION: "http://imaginationeverywhere.info",
+    FB_APP_ID: "168041061141989",
+    DISQUS_SHORTNAME: "diversity-developers"
   }
 });
