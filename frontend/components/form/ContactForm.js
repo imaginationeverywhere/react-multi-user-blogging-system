@@ -5,6 +5,7 @@ import { emailContactForm } from "../../actions/form";
 /**
  * @function ContactForm
  * @param {object} props
+ * @param {string} props.authorEmail
  * @external useState
  * @external Link
  * @requires emailContactForm
@@ -12,7 +13,7 @@ import { emailContactForm } from "../../actions/form";
  * @summary
  * @author Amen Ra
  */
-const ContactForm = props => {
+const ContactForm = ({ authorEmail }) => {
   /**
    * @constant {function} useState @returns {void}
    * @type {object} @var values
@@ -52,7 +53,7 @@ const ContactForm = props => {
   const clickSubmit = e => {
     e.preventDefault();
     setValues({ ...values, buttonText: "Sending..." });
-    emailContactForm({ name, email, message }).then(data => {
+    emailContactForm({ authorEmail, name, email, message }).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {

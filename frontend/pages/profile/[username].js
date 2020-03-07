@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
+import moment from "moment";
 import Layout from "../../components/Layout";
 import { userPublicProfile } from "../../actions/user";
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
-import moment from "moment";
+import ContactForm from "../../components/form/ContactForm";
 
 /**
  * @file User Public Profile Page
@@ -11,6 +12,16 @@ import moment from "moment";
  * @param {object} props
  * @param {object} props.blog
  * @param {object} props.query
+ * @external Head
+ * @external Link
+ * @external moment
+ * @requires Layout
+ * @requires userPublicProfile
+ * @requires API
+ * @requires DOMAIN
+ * @requires APP_NAME
+ * @requires FB_APP_ID
+ * @requires ContactForm
  * @returns {html}
  * @summary Renders the User Public Profile Page
  * {@link http(s)://baseUrl:3085/profile/{username}}
@@ -120,7 +131,7 @@ const UserProfile = ({ user, blogs, query }) => {
                     Message {user.name}
                   </h5>
                   <br />
-                  <p>contact form</p>
+                  <ContactForm authorEmail={user.email} />
                 </div>
               </div>
             </div>
