@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
  * @param {object} props
  * @requires Layout
  * @returns {html}
- * @summary This is the default page of the website
+ * @summary This is the default page of the website {@link http(s)://baseUrl:3085}
  * @author Amen Ra
  */
 const Index = props => {

@@ -11,6 +11,7 @@ import ReadBlogs from "../../../components/crud/ReadBlogs";
  * @requires ReadBlogs
  * @returns {html}
  * @summary This renders the Manage Blogs page
+ * {@link http(s)://baseUrl:3085/admin/crud/blogs}
  * @author Amen Ra
  */
 const Blogs = props => {

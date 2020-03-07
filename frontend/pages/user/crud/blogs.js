@@ -12,6 +12,7 @@ import { isAuth } from "../../../actions/auth";
  * @requires isAuth
  * @return {html}
  * @summary This is the User Blog Management Page
+ * {@link http(s)://baseUrl:3085/user/crud/blogs}
  * @author Amen Ra
  */
 const Blog = props => {

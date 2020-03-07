@@ -32,6 +32,8 @@ import DisqusThread from "../../components/DisqusThread";
  * @requires DisqusThread
  * @returns {html}
  * @summary Renders the Single Blog Page
+ * {@link http(s)://baseUrl:3085/blogs/{slug}}
+ * @example http://localhost:3085/blog/how-to-build-a-react-app
  * @author Amen Ra
  */
 const SingleBlog = ({ blog, query }) => {

@@ -30,6 +30,7 @@ import Card from "../../components/blog/Card";
  * @requires Card
  * @returns {html}
  * @summary Like Wordpress this page displays a list of most recent blogs.
+ * {@link http(s)://baseUrl:3085/blogs}
  * @author Amen Ra
  */
 const Blogs = ({

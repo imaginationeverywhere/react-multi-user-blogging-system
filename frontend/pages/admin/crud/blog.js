@@ -11,7 +11,7 @@ import CreateBlogPost from "../../../components/crud/CreateBlogPost";
  * @requires CreateBlog
  * @returns {html}
  * @summary Renders the html on the Admin Dashboard that
- * links to the Create Blog Page
+ * links to the Create Blog Page {@link http(s)://baseUrl:3085/admin/crud/blog}
  * @author Amen Ra
  */
 const Blog = props => {

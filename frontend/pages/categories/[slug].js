@@ -23,6 +23,8 @@ import Card from "../../components/blog/Card";
  * @requires SingleCategory
  * @returns {html}
  * @summary Renders the Single Category Page
+ * {@link http(s)://baseUrl:3085/categories/{slug}}
+ * @example http://localhost:3085/categories/react
  * @author Amen Ra
  */
 const Category = ({ category, blogs, query }) => {

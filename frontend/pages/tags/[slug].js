@@ -23,6 +23,8 @@ import Card from "../../components/blog/Card";
  * @requires singleTag
  * @returns {html}
  * @summary Renders the Single Tag Page
+ * {@link http(s)://baseUrl:3085/tags/{slug}}
+ * @example http://localhost:3085/tags/react
  * @author Amen Ra
  */
 const Tag = ({ tag, blogs, query }) => {

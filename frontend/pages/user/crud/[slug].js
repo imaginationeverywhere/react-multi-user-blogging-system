@@ -10,7 +10,9 @@ import UpdateBlog from "../../../components/crud/updateBlog";
  * @requires Private
  * @requires UpdateBlog
  * @returns {htmls}
- * @summary Renders the single blog page
+ * @summary Renders the single blog edit/update page
+ * {@link http(s)://baseUrl:3085/user/crud/{slug}}
+ * @example http://localhost:3085/user/crud/what-new-in-programming
  * @author Amen Ra
  */
 const Blog = props => {

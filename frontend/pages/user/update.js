@@ -10,6 +10,7 @@ import ProfileUpdate from "../../components/auth/ProfileUpdate";
  * @requires Private
  * @returns {html}
  * @summary This page is the User Update Page
+ * {@link http(s)://baseUrl:3085/user/update}
  * @author Amen Ra
  */
 const UserProfileUpdate = props => {

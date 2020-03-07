@@ -9,6 +9,7 @@ import SignupComponent from "../components/auth/SignupComponent";
  * @requires SignupComponent
  * @returns {html}
  * @summary This is the page where a user goes to create an account
+ * {@link http(s)://baseUrl:3085/signup}
  * @author Amen Ra
  */
 const Signup = props => {

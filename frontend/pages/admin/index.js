@@ -11,6 +11,7 @@ import Link from "next/link";
  * @requires Link
  * @returns {html}
  * @summary Renders the Admin Dashboard Page.
+ * {@link http(s)://baseUrl:3085/admin}
  * @author Amen Ra
  */
 const AdminIndex = props => {

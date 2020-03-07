@@ -13,6 +13,8 @@ import moment from "moment";
  * @param {object} props.query
  * @returns {html}
  * @summary Renders the User Public Profile Page
+ * {@link http(s)://baseUrl:3085/profile/{username}}
+ * @example http://localhost:3085/profile/mojaray2k
  * @author Amen Ra
  */
 const UserProfile = ({ user, blogs, query }) => {

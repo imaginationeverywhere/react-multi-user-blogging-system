@@ -12,7 +12,9 @@ import Tag from "../../../components/crud/Tag";
  * @requires Category
  * @requires Tag
  * @returns {html}
- * @summary Renders the links that navigate to the Manage Categories and Tags Page
+ * @summary Renders the links that navigate to the Manage
+ * Categories and Tags Page
+ * {@link http(s)://baseUrl:3085/admin/crud/category-tag}
  * @author Amen Ra
  */
 const CategoryTag = props => {

@@ -10,6 +10,7 @@ import Link from "next/link";
  * @requires Private
  * @returns {html}
  * @summary This page is the User Dashboard Page
+ * {@link http(s)://baseUrl:3085/user}
  * @author Amen Ra
  */
 const UserIndex = props => {

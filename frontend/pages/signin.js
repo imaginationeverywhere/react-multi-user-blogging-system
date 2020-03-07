@@ -10,6 +10,7 @@ import SigninComponent from "../components/auth/SigninComponent";
  * @requires SigninComponent
  * @returns {html}
  * @summary This is the page where a user goes to sign into their account
+ * {@link http(s)://baseUrl:3085/signin}
  * @author Amen Ra
  */
 const Signin = ({ router }) => {
