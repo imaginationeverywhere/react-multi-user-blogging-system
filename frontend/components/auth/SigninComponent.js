@@ -115,7 +115,7 @@ const SigninComponent = () => {
   /**
    * @function showLoading
    * @summary If loading is set to true Shows loading indicator while signing in
-   * @return {void}
+   * @return {html}
    */
   const showLoading = () =>
     loading ? <div className="alert alert-info">Loading...</div> : "";
@@ -124,7 +124,7 @@ const SigninComponent = () => {
    * @function showError
    * @summary Shows error generated from the backend
    * if there is an error on signin
-   * @return {void}
+   * @return {html}
    */
   const showError = () =>
     error ? <div className="alert alert-danger">{error}</div> : "";
@@ -132,7 +132,7 @@ const SigninComponent = () => {
   /**
    * @function showMessage
    * @summary Shows a message generated from the backend on signin status
-   * @return {void}
+   * @return {html}
    */
   const showMessage = () =>
     message ? <div className="alert alert-info">{message}</div> : "";
@@ -143,7 +143,8 @@ const SigninComponent = () => {
    * @method handleSubmit
    * @event onChange
    * @method handleChange
-   * @return {signinForm} Generates the sign in form
+   * @return {html}
+   * @summary Generates the sign in form
    */
   const signinForm = () => {
     return (
