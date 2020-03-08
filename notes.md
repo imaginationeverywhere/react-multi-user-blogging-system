@@ -25,3 +25,27 @@
 
 1. Refactor code with Typescript
 2. Paint the Web and App Interface with React Prime custom template
+
+## Forget Passowrd
+
+---
+
+- User requst to reset password
+- we generate a token with userId that expires in 10 minutes
+- email the token
+- also store the token in the database as the user's reset password link
+- Inform the use that the link has been email
+
+## Rest Password
+
+---
+
+- once the user clicks on the reset password link that was emailed
+- user lands on the front end password reset page there we will store the token (that came with the email link)
+- user will enter their new password
+- once submitted the token and the new password will be sent to the backend
+- In the backend there will be a check to verify if the token is expired
+- If the token has not expired then we check if the we can find the user with that token in the database
+- if we find that user then it's a valid reset password request so we update the old password with the new password then empty the resetPasswordLink field.
+- Then send a message to the user saying the password is reset.
+- The user can now login with the new password.

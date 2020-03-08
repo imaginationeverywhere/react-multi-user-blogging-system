@@ -20,4 +20,8 @@ JWT_SECRET=AJFJAFS56516GSDGFK465SGKJKDK
 SENDGRID_API_KEY=SG.HO9KDvTfSj62iMqafsafsaffQOMRw.7C8zN2cIirNIyt9CXeJIkrYP0gJnKsMefyNrE4z4QUc
 // Put You actual email here
 EMAIL_TO=youremailaddress@email.com
+// Put You an alias email here because you don't want any to reply
+EMAIL_FROM=noreply@imaginationeverywhere.info
+// Reset Password Salt
+JWT_RESET_PASSWORD=034957439HIU34R9U43H034OR3H49UH4390P0IH
 ```
