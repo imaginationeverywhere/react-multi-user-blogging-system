@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
 import { signin, authenticate, isAuth } from "../../actions/auth";
-
+import Link from "next/link";
 /**
  * @file React Signin Component
  * @function SigninComponent
  * @external useState
  * @external useEffect
  * @external Router
+ * @external Link
  * @requires signin
  * @requires authenticate
  * @requires isAuth
@@ -182,6 +183,10 @@ const SigninComponent = () => {
       {showLoading()}
       {showMessage()}
       {showForm && signinForm()}
+      <br />
+      <Link href="/auth/password/forgot">
+        <a className="btn btn-outline-danger btn-sm">Forgot password</a>
+      </Link>
     </React.Fragment>
   );
 };

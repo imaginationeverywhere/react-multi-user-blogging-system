@@ -30,7 +30,7 @@ export const handleResponse = response => {
 /**
  * @function signup
  * @param {*} user
- * @returns {void}
+ * @returns {JSON}
  */
 export const signup = user => {
   return fetch(`${API}/signup`, {
@@ -50,7 +50,7 @@ export const signup = user => {
 /**
  * @function signin
  * @param {*} user
- * @returns {void}
+ * @returns {JSON}
  */
 export const signin = user => {
   return fetch(`${API}/signin`, {
@@ -182,7 +182,7 @@ export const isAuth = () => {
  * @function updateUser
  * @param {object} user
  * @param {function} next
- * @returns {void}
+ * @returns {JSON}
  * @summary Updates signed in user information in localstorage
  */
 export const updateUser = (user, next) => {
@@ -194,4 +194,46 @@ export const updateUser = (user, next) => {
       next();
     }
   }
+};
+
+/**
+ * @function forgotPassword
+ * @param {string} email
+ * @returns {JSON}
+ * @summary Sends a reset password link to the users email
+ */
+export const forgotPassword = email => {
+  return fetch(`${API}/forgot-password`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(email)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+/**
+ * @function resetPassword
+ * @param {object} resetInfo
+ * @returns {JSON}
+ * @summary Resets the user's password with a new one in the database
+ */
+export const resetPassword = resetInfo => {
+  return fetch(`${API}/reset-password`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(resetInfo)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
 };

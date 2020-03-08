@@ -165,6 +165,7 @@ const ProfileUpdate = () => {
    * @function profileUpdateForm
    * @fires handleChange
    * @returns {html}
+   * @summary Generates the profileUpateForm
    */
   const profileUpdateForm = () => (
     <form onSubmit={handleSubmit}>
