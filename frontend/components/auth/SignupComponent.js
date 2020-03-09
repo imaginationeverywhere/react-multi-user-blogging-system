@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
-import { signup, isAuth } from "../../actions/auth";
+import { signup, isAuth, preSignup } from "../../actions/auth";
 
 /**
  * @file React Sign Up Component
@@ -8,6 +8,7 @@ import { signup, isAuth } from "../../actions/auth";
  * @external useState
  * @external useEffect
  * @external Router
+ * @requires preSignup
  * @requires signup
  * @requires authenticate
  * @requires isAuth
@@ -70,8 +71,8 @@ const SignupComponent = () => {
    * @function handleSubmit
    * @param {event} e
    * @method preventDefault
-   * @method setValues React useState Hook
-   * @method signup action
+   * @method setValues
+   * @method preSignup
    * @summary onClick event for user to sign up
    * @return {void}
    */
@@ -81,7 +82,7 @@ const SignupComponent = () => {
     setValues({ ...values, loading: true, error: false });
     const user = { name, email, password };
 
-    signup(user).then(data => {
+    preSignup(user).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
@@ -114,7 +115,7 @@ const SignupComponent = () => {
   /**
    * @function showLoading
    * @summary If loading is set to true shows loading indicator while signing up
-   * @return {void}
+   * @return {html}
    */
   const showLoading = () =>
     loading ? <div className="alert alert-info">Loading...</div> : "";
@@ -123,7 +124,7 @@ const SignupComponent = () => {
    * @function showError
    * @summary Shows error generated from the backend
    * if there is an error on sigining up
-   * @return {void}
+   * @return {html}
    */
   const showError = () =>
     error ? <div className="alert alert-danger">{error}</div> : "";
@@ -131,7 +132,7 @@ const SignupComponent = () => {
   /**
    * @function
    * @summary Shows a message generated from the backend on signup status
-   * @return {void}
+   * @return {html}
    */
   const showMessage = () =>
     message ? <div className="alert alert-info">{message}</div> : "";

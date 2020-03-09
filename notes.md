@@ -2,11 +2,11 @@
 
 ## General Admin Tasks to complete
 
-1. Finish Up Default User Profile
-2. Give default users the ability to create content
-3. Token expiration and Chat and commenting system
-4. Sending emaails with Sendgrid
-5. Password forgot and reset
+1. ~~Finish Up Default User Profile~~
+2. ~~Give default users the ability to create content~~
+3. ~~Token expiration and commenting system~~
+4. ~~Sending emaails with Sendgrid~~
+5. ~~Password forgot and reset~~
 6. Activation and Signup
 7. Social Login with Google
 8. Google Analytics
@@ -49,3 +49,9 @@
 - if we find that user then it's a valid reset password request so we update the old password with the new password then empty the resetPasswordLink field.
 - Then send a message to the user saying the password is reset.
 - The user can now login with the new password.
+
+## Account Activation via emsil is required on Signup
+
+Before signup process is complete run pre signup so basically whatever data is
+needed on signup is retrieved from the user during pre signup. Put the user's data
+in the user name, email, and password in the `jwt` then send that to the user's email if click grab that in **React** then send it to the backend extract the user info from `jwt` and use that info to create/save the new user in the db.

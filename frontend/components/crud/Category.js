@@ -155,13 +155,7 @@ const Category = props => {
    * @function clickSubmit
    * @param {event} e
    * @fires preventDefault
-   * @fires create (
-   *  @param {object} name
-   *  @param string
-   *  @fires setValues (
-   *    @returns {void}
-   *  )
-   * )
+   * @fires create
    * @returns {void}
    */
   const clickSubmit = e => {

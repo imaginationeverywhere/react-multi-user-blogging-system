@@ -10,38 +10,118 @@ const sgMail = require("@sendgrid/mail"); // SENDGRID_API_KEY
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 /**
+ * @function preSignup
+ * @param {object} req
+ * @param {object} res
+ * @returns {JSON}
+ * @summary Sends out an email with a account activation link and saves that data
+ * in that link whcih is the name, email, and password in the database.
+ */
+const preSignup = (req, res) => {
+  const { name, email, password } = req.body;
+  User.findOne({ email: email.toLowerCase() }, (err, user) => {
+    if (user) {
+      return res.status(400).json({
+        error: "Email is taken"
+      });
+    }
+    const token = jwt.sign(
+      { name, email, password },
+      process.env.JWT_ACCOUNT_ACTIVATION,
+      { expiresIn: "10m" }
+    );
+
+    const emailData = {
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: `${process.env.APP_NAME} Account activation link`,
+      html: `
+          <p>Please use the following link to activate your acccount:</p>
+          <p>${process.env.CLIENT_URL}/auth/account/activate/${token}</p>
+          <hr />
+          <p>This email may contain sensetive information</p>
+          <p>http://imaginationeverywhere.info</p>
+      `
+    };
+
+    sgMail.send(emailData).then(sent => {
+      return res.json({
+        message: `Email has been sent to ${email}. Follow the instructions to activate your account.`
+      });
+    });
+  });
+};
+
+// const signup = (req, res) => {
+//   User.findOne({ email: req.body.email }).exec((err, user) => {
+//     if (user) {
+//       return res.status(400).json({
+//         error: "Email is already used"
+//       });
+//     }
+
+//     const { name, email, password } = req.body;
+//     let username = shortId.generate();
+//     let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+
+//     let newUser = new User({ name, email, password, profile, username });
+//     newUser.save((err, success) => {
+//       if (err) {
+//         return res.status(400).json({
+//           error: err
+//         });
+//       }
+//       // res.json({
+//       //     user: success
+//       // });
+//       res.json({
+//         message: "Signup success! Please signin."
+//       });
+//     });
+//   });
+// };
+
+/**
  * @function signup
  * @param {object} req
  * @param {object} res
  * @returns {void}
  */
 const signup = (req, res) => {
-  User.findOne({ email: req.body.email }).exec((err, user) => {
-    if (user) {
-      return res.status(400).json({
-        error: "Email is already used"
-      });
-    }
-
-    const { name, email, password } = req.body;
-    let username = shortId.generate();
-    let profile = `${process.env.CLIENT_URL}/profile/${username}`;
-
-    let newUser = new User({ name, email, password, profile, username });
-    newUser.save((err, success) => {
+  const token = req.body.token;
+  if (token) {
+    jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function(
+      err,
+      decoded
+    ) {
       if (err) {
-        return res.status(400).json({
-          error: err
+        return res.status(401).json({
+          error: "Expired link. Signup again"
         });
       }
-      // res.json({
-      //     user: success
-      // });
-      res.json({
-        message: "Signup success! Please signin."
+
+      const { name, email, password } = jwt.decode(token);
+
+      let username = shortId.generate();
+      let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+
+      const user = new User({ name, email, password, profile, username });
+      user.save((err, user) => {
+        if (err) {
+          return res.status(401).json({
+            error: errorHandler(err)
+          });
+        }
+        return res.json({
+          message: "Singup success! Please signin"
+        });
       });
     });
-  });
+  } else {
+    return res.json({
+      message: "Something went wrong. Try again"
+    });
+  }
 };
 
 /**
@@ -206,7 +286,7 @@ const forgotPassword = (req, res) => {
           <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
           <hr />
           <p>This email may contain sensetive information</p>
-          <p>https://imaginationeverywhere.info</p>
+          <p>http://imaginationeverywhere.info</p>
       `
     };
     // populating the db > user > resetPasswordLink
@@ -283,5 +363,6 @@ module.exports = {
   adminMiddleware,
   canUpdateDeleteBlog,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  preSignup
 };

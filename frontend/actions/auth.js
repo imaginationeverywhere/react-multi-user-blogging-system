@@ -28,6 +28,27 @@ export const handleResponse = response => {
 };
 
 /**
+ * @function preSignup
+ * @param {object} user
+ * @returns {JSON}
+ * @summary Sends an activaton lik to a new user's email to activate their account.
+ */
+export const preSignup = user => {
+  return fetch(`${API}/pre-signup`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+/**
  * @function signup
  * @param {*} user
  * @returns {JSON}
