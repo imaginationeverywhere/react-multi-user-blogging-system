@@ -26,4 +26,6 @@ EMAIL_FROM=noreply@imaginationeverywhere.info
 JWT_RESET_PASSWORD=034957439HIU34R9U43H034OR3H49UH4390P0IH
 // Account Activation Salt
 JWT_ACCOUNT_ACTIVATION=034957439HIU34R9U43H034OR3H49UH4390P0IH
+// for Social Login get your own google client id from console.cloud.google.com
+GOOGLE_CLIENT_ID=59757125982-qcq5rbafihif2jr1j53kp0gbf8q7sqnm.apps.googleusercontent.com
 ```

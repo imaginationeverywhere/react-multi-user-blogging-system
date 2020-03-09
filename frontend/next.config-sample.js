@@ -9,6 +9,8 @@ module.exports = withCSS({
     DOMAIN_DEVELOPMEWNT: "http://localhost:3085",
     DOMAIN_PRODUCTION: "http://imaginationeverywhere.info",
     FB_APP_ID: "168041061141989",
-    DISQUS_SHORTNAME: "diversity-developers"
+    DISQUS_SHORTNAME: "diversity-developers",
+    GOOGLE_CLIENT_ID:
+      "59757125982-qcq5rbafihif2jr1j53kp0gbf8q7sqnm.apps.googleusercontent.com"
   }
 });

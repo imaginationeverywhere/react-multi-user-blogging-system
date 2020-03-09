@@ -258,3 +258,24 @@ export const resetPassword = resetInfo => {
     })
     .catch(err => console.log(err));
 };
+
+/**
+ * @function loginWithGoogle
+ * @param {object} user
+ * @returns {JSON}
+ * @summary Allows the user to either signup or login to their account
+ */
+export const loginWithGoogle = user => {
+  return fetch(`${API}/google-login`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
