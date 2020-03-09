@@ -38,14 +38,16 @@ const userRoutes = require("./routes/user");
 // category routes
 const categoryRoutes = require("./routes/category");
 // tag routes
-const tagRoutes = require('./routes/tag');
+const tagRoutes = require("./routes/tag");
+const formRoutes = require("./routes/form");
 
 // routes middleware
 app.use("/api", blogRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
-app.use('/api', tagRoutes);
+app.use("/api", tagRoutes);
+app.use("/api", formRoutes);
 
 // port
 const port = process.env.PORT || 8000;

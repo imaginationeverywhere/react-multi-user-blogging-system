@@ -1,10 +1,29 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Router from "next/router";
-import { isAuth, getCookie } from "../../actions/auth";
+import { getCookie } from "../../actions/auth";
 import { create, getCategories, removeCategory } from "../../actions/category";
 
-const Category = () => {
+/**
+ * @file Category Compoent
+ * @function Category
+ * @external useEffect
+ * @external useState
+ * @param {object} props
+ * @requires getCookie
+ * @requires create
+ * @requires getCategories
+ * @requires removeCategory
+ * @returns {html}
+ * @summary This component is used on the Manage Categories and Tags Page
+ * {@link frontend/pages/admin/crud/category-tag.js}
+ * @returns {html}
+ * @author Amen Ra
+ */
+const Category = props => {
+  /**
+   * @constant {function} useState @returns {void}
+   * @type {object} @var values
+   * @type {function} @function setValues @returns {void}
+   */
   const [values, setValues] = useState({
     name: "",
     error: false,
@@ -14,14 +33,49 @@ const Category = () => {
     reload: false
   });
 
+  /**
+   * @constant {object} values
+   * @type {string} @var name
+   * @type {boolean} @var error
+   * @type {boolean} @var success
+   * @type {array} @var categories
+   * @type {boolean} @var removed
+   * @type {boolean} @var reload
+   */
   const { name, error, success, categories, removed, reload } = values;
+
+  /**
+   * @constant {function} token
+   * @fires getCookie @param {string}
+   */
   const token = getCookie("token");
 
+  /**
+   * @external useEffect
+   * @fires loadCategories
+   * @returns {void}
+   * @description Accepts a function that contains imperative, possibly effectful code.
+   * @param effect — Imperative function that can return a cleanup function
+   * @param deps — If present, effect will only activate if the values in the list change.
+   * @version — 16.8.0
+   * @see — https://reactjs.org/docs/hooks-reference.html#useeffect
+   * @summary This fires when the compoennt is mounted and loads a list of categories.
+   */
   useEffect(() => {
     loadCategories();
   }, [reload]);
 
+  /**
+   * @function loadCategories
+   * @fires getCategories
+   * @returns {void}
+   */
   const loadCategories = () => {
+    /**
+     * @function getCategories
+     * @fires setValues
+     * @returns {void}
+     */
     getCategories().then(data => {
       if (data.error) {
         console.log(data.error);
@@ -31,6 +85,12 @@ const Category = () => {
     });
   };
 
+  /**
+   * @function showCategories
+   * @event onClick @fires deleteConfirm
+   * @returns {html}
+   * @summary Displays a button for every category that exists in the database
+   */
   const showCategories = () => {
     return categories.map((c, i) => {
       return (
@@ -38,7 +98,7 @@ const Category = () => {
           onDoubleClick={() => deleteConfirm(c.slug)}
           title="Double click to delete"
           key={i}
-          className="btn btn-outline-primary mr-1 ml-1 mt-3"
+          className="btn btn-primary mr-1 ml-1 mt-3"
         >
           {c.name}
         </button>
@@ -46,6 +106,12 @@ const Category = () => {
     });
   };
 
+  /**
+   * @function deleteConfirm
+   * @param {string} slug
+   * @fires deleteCategory (@param {string} slug)
+   * @returns {void}
+   */
   const deleteConfirm = slug => {
     let answer = window.confirm(
       "Are you sure you want to delete this category?"
@@ -55,6 +121,18 @@ const Category = () => {
     }
   };
 
+  /**
+   * @function deleteCategory
+   * @param {string} slug
+   * @fires removeCategory (
+   *  @param {string} slug
+   *  @param {string} token
+   *  @fires setValues (
+   *    @returns {void}
+   *  )
+   * )
+   * @returns {void}
+   */
   const deleteCategory = slug => {
     // console.log('delete', slug);
     removeCategory(slug, token).then(data => {
@@ -73,6 +151,13 @@ const Category = () => {
     });
   };
 
+  /**
+   * @function clickSubmit
+   * @param {event} e
+   * @fires preventDefault
+   * @fires create
+   * @returns {void}
+   */
   const clickSubmit = e => {
     e.preventDefault();
     // console.log('create category', name);
@@ -92,6 +177,13 @@ const Category = () => {
     });
   };
 
+  /**
+   * @function handleChange
+   * @fires setValues (
+   *  @returns {void}
+   * )
+   * @param {event} e
+   */
   const handleChange = e => {
     setValues({
       ...values,
@@ -102,28 +194,54 @@ const Category = () => {
     });
   };
 
+  /**
+   * @function showSuccess
+   * @returns {html}
+   */
   const showSuccess = () => {
     if (success) {
       return <p className="text-success">Category is created</p>;
     }
   };
 
+  /**
+   * @function showError
+   * @returns {html}
+   */
   const showError = () => {
     if (error) {
       return <p className="text-danger">Category already exist</p>;
     }
   };
 
+  /**
+   * @function showRemoved
+   * @returns {html}
+   */
   const showRemoved = () => {
     if (removed) {
       return <p className="text-danger">Category is removed</p>;
     }
   };
 
+  /**
+   * @function mouseMoveHandler
+   * @param {event} e
+   * @fires setValues (
+   *  @returns {void}
+   * )
+   * @returns {void}
+   */
   const mouseMoveHandler = e => {
     setValues({ ...values, error: false, success: false, removed: "" });
   };
 
+  /**
+   * @function newCategoryForm
+   * @returns {html}
+   * @event onSubmit @fires clickSubmit
+   * @event onChange @fires handleChange
+   */
   const newCategoryForm = () => (
     <form onSubmit={clickSubmit}>
       <div className="form-group">
@@ -137,7 +255,7 @@ const Category = () => {
         />
       </div>
       <div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-outline-primary">
           Create Category
         </button>
       </div>
