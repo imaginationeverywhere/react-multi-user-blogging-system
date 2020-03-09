@@ -113,9 +113,12 @@ const Header = props => {
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link href="/admin/crud/blog">
-                    <a className="btn btn-primary text-white">Write A Post</a>
-                  </Link>
+                  <a
+                    className="btn btn-primary text-white"
+                    href="/admin/crud/blog"
+                  >
+                    Write A Post
+                  </a>
                 </NavItem>
               </React.Fragment>
             )}
