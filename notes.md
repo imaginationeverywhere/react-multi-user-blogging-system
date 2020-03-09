@@ -7,7 +7,7 @@
 3. ~~Token expiration and commenting system~~
 4. ~~Sending emaails with Sendgrid~~
 5. ~~Password forgot and reset~~
-6. Activation and Signup
+6. ~~Activation and Signup~~
 7. Social Login with Google
 8. Google Analytics
 
