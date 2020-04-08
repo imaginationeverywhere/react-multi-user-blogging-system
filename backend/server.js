@@ -50,7 +50,7 @@ app.use("/api", tagRoutes);
 app.use("/api", formRoutes);
 
 // port
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8085;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

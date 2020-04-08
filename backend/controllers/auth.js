@@ -177,6 +177,8 @@ const singout = (req, res) => {
 
 /**
  * @function requireSignin
+ * @fires expressJWT
+ * @returns {void}
  */
 const requireSignin = expressJwt({
   secret: process.env.JWT_SECRET

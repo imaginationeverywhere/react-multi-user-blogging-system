@@ -80,6 +80,7 @@ const read = (req, res) => {
  * @param {object} req
  * @param {object} res
  * @returns {void}
+ * @summary Removes a category from the database
  */
 const remove = (req, res) => {
   const slug = req.params.slug.toLowerCase();
