@@ -14,3 +14,4 @@
 8. email confirmation on signup
 9. login with Google
 10. Deploy to aws
+11. Setup Stripe and Braintree Payment Gateways
