@@ -2,7 +2,19 @@ import Layout from "../../components/Layout";
 import Admin from "../../components/auth/Admin";
 import Link from "next/link";
 
-const AdminIndex = () => {
+/**
+ * @file Admin Dashboard Page
+ * @function AdminIndex
+ * @param {object} props
+ * @requires Layout
+ * @requires Admin
+ * @requires Link
+ * @returns {html}
+ * @summary Renders the Admin Dashboard Page.
+ * {@link http(s)://baseUrl:3085/admin}
+ * @author Amen Ra
+ */
+const AdminIndex = props => {
   return (
     <Layout>
       <Admin>
@@ -24,8 +36,18 @@ const AdminIndex = () => {
                   </Link>
                 </li>
                 <li className="list-group-item">
-                  <Link href="/admin/crud/blog">
-                    <a>Create Blog</a>
+                  {/* Force page to reload using <a> tag so 
+                    editor always renders correctly  */}
+                  <a href="/admin/crud/blog">Create Blog</a>
+                </li>
+                <li className="list-group-item">
+                  <Link href="/admin/crud/blogs">
+                    <a>Update/Delete Blogs</a>
+                  </Link>
+                </li>
+                <li className="list-group-item">
+                  <Link href="/user/update">
+                    <a>Update Profile</a>
                   </Link>
                 </li>
               </ul>
