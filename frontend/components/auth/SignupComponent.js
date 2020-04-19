@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
-import { signup, isAuth, preSignup } from "../../actions/auth";
+import { isAuth, preSignup } from "../../actions/auth";
 
 /**
  * @file React Sign Up Component
@@ -35,7 +35,7 @@ const SignupComponent = () => {
     error: "",
     loading: false,
     message: "",
-    showForm: true
+    showForm: true,
   });
 
   /**
@@ -76,13 +76,13 @@ const SignupComponent = () => {
    * @summary onClick event for user to sign up
    * @return {void}
    */
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // console.table({ name, email, password, error, loading, message, showForm });
     setValues({ ...values, loading: true, error: false });
     const user = { name, email, password };
 
-    preSignup(user).then(data => {
+    preSignup(user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
@@ -94,7 +94,7 @@ const SignupComponent = () => {
           error: "",
           loading: false,
           message: data.message,
-          showForm: false
+          showForm: false,
         });
       }
     });
@@ -108,7 +108,7 @@ const SignupComponent = () => {
    * @summary Getting values as they are entered into inputs on the page
    * @return {void}
    */
-  const handleChange = name => e => {
+  const handleChange = (name) => (e) => {
     setValues({ ...values, error: false, [name]: e.target.value });
   };
 

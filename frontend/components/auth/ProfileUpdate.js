@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import Router from "next/router";
-import { getCookie, isAuth, updateUser } from "../../actions/auth";
+import { getCookie, updateUser } from "../../actions/auth";
 import { getProfile, update } from "../../actions/user";
 import { API } from "../../config";
 
@@ -22,7 +20,7 @@ const ProfileUpdate = () => {
     success: false,
     loading: false,
     photo: "",
-    userData: process.browser && new FormData()
+    userData: process.browser && new FormData(),
   });
 
   /**
@@ -56,7 +54,7 @@ const ProfileUpdate = () => {
     success,
     loading,
     photo,
-    userData
+    userData,
   } = values;
 
   /**
@@ -71,7 +69,7 @@ const ProfileUpdate = () => {
      * @fires setValues
      * @returns {void}
      */
-    getProfile(token).then(data => {
+    getProfile(token).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -81,7 +79,7 @@ const ProfileUpdate = () => {
           username_for_photo: data.username,
           name: data.name,
           email: data.email,
-          about: data.about
+          about: data.about,
         });
       }
     });
@@ -112,7 +110,7 @@ const ProfileUpdate = () => {
    * @fires setValues
    * @returns {void}
    */
-  const handleChange = name => e => {
+  const handleChange = (name) => (e) => {
     // console.log(e.target.value);
     const value = name === "photo" ? e.target.files[0] : e.target.value;
     // let userData = new FormData();
@@ -123,7 +121,7 @@ const ProfileUpdate = () => {
       [name]: value,
       userData,
       error: false,
-      success: false
+      success: false,
     });
   };
 
@@ -133,16 +131,16 @@ const ProfileUpdate = () => {
    * @fires setValues
    * @fires update
    */
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setValues({ ...values, loading: true });
-    update(token, userData).then(data => {
+    update(token, userData).then((data) => {
       if (data.error) {
         setValues({
           ...values,
           error: data.error,
           success: false,
-          loading: false
+          loading: false,
         });
       } else {
         updateUser(data, () => {
@@ -154,7 +152,7 @@ const ProfileUpdate = () => {
             about: data.about,
             password: "",
             success: true,
-            loading: false
+            loading: false,
           });
         });
       }
