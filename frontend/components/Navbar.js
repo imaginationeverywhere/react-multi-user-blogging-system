@@ -1,7 +1,14 @@
 
 const Navbar = () => {
     return (
-        <div>Navbar</div>
+        <React.Fragment>
+            <div>Home</div>
+            <div>About</div>
+            <div>Our Mission</div>
+            <div>Logo</div>
+            <div>Blog</div>
+            <div>Contact</div>
+        </React.Fragment>
     );
 }
 
