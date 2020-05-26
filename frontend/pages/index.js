@@ -1,10 +1,10 @@
-import Layout from "../components/Layout";
+import Layout from "../components/HomeLayout";
 
 const Index = () => {
   return (
-    <Layout>
-      <h2>Home Page</h2>
-    </Layout>
+    <HomeLayout>
+      <h2>Black With No Chaser</h2>
+    </HomeLayout>
   );
 };
 
