@@ -1,4 +1,4 @@
-import Layout from "../components/HomeLayout";
+import HomeLayout from "../components/HomeLayout";
 
 const Index = () => {
   return (

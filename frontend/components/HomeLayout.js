@@ -1,9 +1,9 @@
-import Header from "./Header";
+import Navbar from "./Navbar";
 
 const HomeLayout = ({ children }) => {
   return (
     <React.Fragment>
-      <Header />
+      <Navbar />
       {children}
     </React.Fragment>
   );
