@@ -1,32 +1,26 @@
-import { useState } from "react";
-import Link from "next/link";
-import Router from "next/router";
-// import NProgress from 'nprogress';
-// import {
-//   Collapse,
-//   Navbar,
-//   NavbarToggler,
-//   Nav,
-//   NavItem,
-//   NavLink,
-//   NavbarBrand
-// } from "reactstrap";
-import { APP_NAME } from "../config";
-import { signout, isAuth } from "../actions/auth";
-// import "../node_modules/nprogress/nprogress.css";
-// import "../static/css/styles.css";
+import Logo from '../components/Logo';
+import Menu from '../components/Menu';
 
-// Router.onRouteChangeStart = url => NProgress.start();
-// Router.onRouteChangeComplete = url => NProgress.done();
-// Router.onRouteChangeError = url => NProgress.done();
+const Header = () => (
+  <div className="header">
+    <Logo />
+    <Menu />
 
-const Header = () => {
-
-
-  return (
-    <div>
-    </div>
-  );
-};
+    <style jsx>{`
+      .header {
+        padding: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      @media (max-width: 600px) {
+        .header-wrapper {
+          display: block;
+          text-align: center;
+        }
+      }
+    `}</style>
+  </div>
+);
 
 export default Header;
