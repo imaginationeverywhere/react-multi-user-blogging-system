@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import Gallery from '../components/Gallery';
+import ImageCarousel from '../components/ImageCarousel';
 
 const images = [
   'https://picsum.photos/600/300',
@@ -23,6 +24,7 @@ const Homepage = () => (
     <div className="latest-work">
       <h2>Latest Work</h2>
       <Gallery images={images} />
+      <ImageCarousel/>
     </div>
     <div className="contact">
       <h2>Contact Us</h2>
