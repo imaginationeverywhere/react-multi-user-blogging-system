@@ -1,18 +1,12 @@
 import Layout from '../components/Layout';
+import { Row, Col } from 'reactstrap';
+
+// add meet the team section
+
 
 const About = () => (
   <Layout>
-    <h1>About Us</h1>
-    <ul className="company-info">
-      <li>
-        <span className="company">Black With No Chaser</span>
-      </li>
-      <li>101 Elm Street</li>
-      <li>San Francisco, CA</li>
-      <li>
-        <a href="mailto:greg@blackwithnochaser.com">greg@blackwithnochaser</a>
-      </li>
-    </ul>
+    <h2>About Us</h2>
     <div className="about-text">
       <img src="/static/images/BWNCICON-4.png" />
       <p>
@@ -32,6 +26,90 @@ const About = () => (
         maximus sed tortor.
       </p>
     </div>
+    <h2>Who are we?</h2>
+
+    <Row>
+        <Col sm="12" md={{size: 8, offset: 2}}>
+        <Row>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+          <Col sm="12" md="3">
+            <div className="team-member">
+              <img src="/static/images/BWNCICON-4.png"/>
+              <span>First Last</span>
+            </div>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
     <style jsx>{`
       .company-info {
         margin: 0 0 100px 0;
@@ -60,6 +138,22 @@ const About = () => (
           display: block;
           margin: 0 auto 30px;
         }
+      }
+      .team-member {
+        height: 200px;
+        width: 200px;
+        margin: 20px;
+      }
+      .team-member img {
+        width:150px;
+        height:150px;
+        object-fit:cover;
+        border-radius:50%;
+        float: none;
+        display:block;
+      }
+      .team-member span {
+        margin: 0 auto;
       }
     `}</style>
   </Layout>

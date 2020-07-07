@@ -25,6 +25,7 @@
     "reactstrap": "^8.5.1"
   },
   "devDependencies": {
+    "font-awesome": "^4.7.0",
     "react-swipeable": "^5.5.1"
   }
 }

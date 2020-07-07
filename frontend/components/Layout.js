@@ -1,9 +1,11 @@
 import Header from '../components/Header';
+import Cover from '../components/Cover';
 import Footer from '../components/Footer';
 
 const Layout = props => (
   <div className="site-wrapper">
     <Header />
+    <Cover />
     <div className="content-wrapper">{props.children}</div>
     <Footer />
 

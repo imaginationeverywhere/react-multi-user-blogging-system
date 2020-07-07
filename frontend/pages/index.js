@@ -3,6 +3,8 @@ import Layout from '../components/Layout';
 import Gallery from '../components/Gallery';
 import ImageCarousel from '../components/ImageCarousel';
 import { MultipleCarousel } from '../components/Carousel/MultipleCarousel';
+import SocialMedia from '../components/SocialMedia';
+import SubNav from '../components/SubNav';
 
 const images = [
   'https://picsum.photos/600/300',
@@ -13,14 +15,9 @@ const images = [
 
 const Homepage = () => (
   <Layout>
-    <div className="cover">
-      <div className="hello">
-        <h1>We're BWNC </h1>
-        <div>Insert Captivating graphic</div>
-        <Link href="/about">
-          <a className="view-more">Who we are</a>
-        </Link>
-      </div>
+   <SubNav />
+    <div className="social-container">
+      <SocialMedia />
     </div>
     <div className="latest-work">
       <h2>Latest Work</h2>
