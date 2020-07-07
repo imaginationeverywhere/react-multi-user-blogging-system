@@ -13,6 +13,11 @@ const Menu = () => (
       </Link>
     </li>
     <li>
+      <Link href="/brands">
+        <a>Brands</a>
+      </Link>
+    </li>
+    <li>
       <Link href="/mission">
         <a>Our Mission</a>
       </Link>
