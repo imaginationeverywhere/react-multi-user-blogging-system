@@ -284,3 +284,24 @@ exports.photo = (req, res) => {
       return res.send(blog.photo.data);
     });
 };
+
+exports.listRelated = (req, res) => {
+  // console.log(req.body.blog);
+  let limit = req.body.limit ? parseInt(req.body.limit) : 3;
+  const {_id, categories} = req.body.blog;
+
+  // $ne means don't include the id of this blog
+  // $in means include the categories of this blog
+  Blog.find({_id: {$ne: _id}, categories: {$in: categories}})
+  .limit(limit)
+  .populate('postedBy', '_id name profile')
+  .select('title slug excerpt postedBy createdAt updatedAt')
+  .exec((err, blogs) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'Blogs not found'
+      });
+    }
+    res.json(blogs);
+  })
+}
